@@ -1,44 +1,19 @@
 "use client"
 
 import React from 'react';
-import { motion } from "framer-motion";
 import DataGraphPage from '../data-graph';
 
 const PieSection = () => {
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.4,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
-  };
-
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.5, ease: "easeOut" }}
-      viewport={{ once: true }}
-    >
+    <div>
       <div className="flex flex-col items-center justify-center text-center px-4">
        
-        <motion.div
+        <div
           className="grid grid-cols-12 gap-12 md:gap-24 w-full max-w-[1400px]"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
         >
             {/* performance screenshot section */}
-          <motion.div
+          <div
             className="bg-cardBgColor border border-customDarkGray rounded-2xl shadow-[0_0_25px_rgba(176,176,176,0.4)]  p-8 col-span-12"
-            variants={cardVariants}
           >
             {/* Chart Section */}
             <div className="mb-6">
@@ -90,11 +65,10 @@ const PieSection = () => {
                 <li>Even through market volatility</li>
               </ul>
             </div>
-          </motion.div>
+          </div>
           {/* Graph screenshot section */}
-          <motion.div
+          <div
             className="bg-cardBgColor border border-customDarkGray  rounded-2xl shadow-[0_0_25px_rgba(176,176,176,0.4)]  p-8 col-span-12"
-            variants={cardVariants}
           >
             {/* Chart Section */}
             <div className="mb-6">
@@ -119,10 +93,10 @@ const PieSection = () => {
                 </svg>
               </a>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

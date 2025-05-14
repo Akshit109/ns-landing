@@ -15,8 +15,8 @@ const Disclaimer = () => {
         </div>
         
         {/* Disclaimer */}
-        <div className="bg-cardBgColor border border-customDarkGray rounded-lg shadow-[0_0_25px_rgba(176,176,176,0.4)]  p-4 mb-8">
-          <p className="text-sm text-customLightGray text-center">
+        <div className="bg-cardBgColor border border-customDarkGray rounded-lg shadow-[0_0_25px_rgba(176,176,176,0.4)] mb-8 p-2">
+          <p className="text-sm text-customLightGray text-center m-0">
             Disclaimer: Nifty Shloka is a strategy offering and not an advisory product. Investments are subject to market risks. Past performance is not indicative of future results.
           </p>
         </div>

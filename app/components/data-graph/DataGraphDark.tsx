@@ -72,18 +72,18 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
     string,
     DataEntry
   > | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isChartReady, setIsChartReady] = useState(false);
 
+  // This effect runs once on mount to delay the chart readiness signal
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(mediaQuery.matches);
-
-    const handler = (event: MediaQueryListEvent) =>
-      setIsDarkMode(event.matches);
-    mediaQuery.addEventListener('change', handler);
-
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
+    // Delay chart initialization to ensure DOM is fully ready
+    const timer = setTimeout(() => {
+      setIsChartReady(true);
+    }, 300); // 300ms delay
+    
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array - runs only once on mount
 
   useEffect(() => {
     if (data && latestDate) {
@@ -126,9 +126,15 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
   }, [data, range, endDate]);
 
   useEffect(() => {
-    // Ensure the container ref exists and filteredData is available
-    if (!filteredData || !chartContainerRef.current) {
+    // Only proceed if filterData is available, container exists, AND the chart is ready to be created
+    if (!filteredData || !chartContainerRef.current || !isChartReady) {
       return;
+    }
+    
+    // Clean up any existing chart before creating a new one
+    if (chartRef.current) {
+      chartRef.current.dispose();
+      chartRef.current = null;
     }
 
     try {
@@ -215,8 +221,20 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
           wheelY: 'zoomX',
           pinchZoomX: true,
           maxTooltipDistance: 0,
+          paddingLeft: 0,  // Ensure no extra padding
+          paddingRight: 0, // Ensure no extra padding
         })
       );
+
+      // Explicitly set the chart and container to take maximum space
+      chart.root.dom.style.width = "100%";
+      chart.root.dom.style.height = "100%";
+      
+      // Set container to occupy full space
+      container.setAll({
+        width: am5.p100,
+        height: am5.p100,
+      });
 
       // Add cursor
       const cursor = chart.set('cursor', am5xy.XYCursor.new(root, {}));
@@ -359,9 +377,58 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
       chart.appear(1000, 100);
       dateAxis.zoom(0, 1);
 
+      // Multiple resize attempts with different delays
+      const timeoutIds: number[] = [];
+      
+      // Immediate resize
+      root.resize();
+      
+      // After a short delay (for the initial layout to settle)
+      timeoutIds.push(
+        window.setTimeout(() => {
+          if (chartRef.current) {
+            chartRef.current.resize();
+          }
+        }, 50)
+      );
+      
+      // After animation completes
+      timeoutIds.push(
+        window.setTimeout(() => {
+          if (chartRef.current) {
+            chartRef.current.resize();
+          }
+        }, 1200) // Just after the 1000ms appear animation
+      );
+      
+      // One more time after everything should be stable
+      timeoutIds.push(
+        window.setTimeout(() => {
+          if (chartRef.current) {
+            chartRef.current.resize();
+          }
+        }, 2000)
+      );
+
+      // Continue with ResizeObserver setup
+      const resizeObserver = new ResizeObserver(() => {
+        if (chartRef.current) {
+          chartRef.current.resize();
+        }
+      });
+
+      // Start observing the chart container
+      resizeObserver.observe(chartContainerRef.current);
+
       // Refined cleanup function
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       return () => {
+        // Clear all timeout IDs
+        timeoutIds.forEach(id => window.clearTimeout(id));
+        
+        // Stop observing
+        resizeObserver.disconnect();
+
         // Check if root exists before disposing
         if (chartRef.current) {
           chartRef.current.dispose();
@@ -376,7 +443,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
         chartRef.current = null;
       }
     }
-  }, [filteredData, isDarkMode]);
+  }, [filteredData, isDarkMode, isChartReady]);
 
   const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRange(event.target.value);
@@ -408,8 +475,20 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
       <div
         ref={chartContainerRef}
         id="chartdivportfolio"
-        style={{ width: '100%', height: '550px' }}
-      />
+        style={{ 
+          width: '100%', 
+          height: '550px',
+          minWidth: '100%',
+          minHeight: '550px',
+          position: 'relative'
+        }}
+      >
+        {!isChartReady && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-lg">Loading chart...</div>
+          </div>
+        )}
+      </div>
       <div className="text-right mt-2">
         {data ? (
           <LastUpdatedStatusDisplay lastUpdatedDate={lastUpdated} />
