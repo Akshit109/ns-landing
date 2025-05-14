@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from "framer-motion";
+import DataGraphPage from '../data-graph';
 
 const PieSection = () => {
   const containerVariants = {
@@ -100,12 +101,9 @@ const PieSection = () => {
             <h2 className="text-4xl text-customDarkGray md:text-6xl font-normal mb-6">
             Portfolio Performance 
         </h2>
-              {/* Chart Placeholder */}
-              {/* <img
-                src="/graph.jpg"
-                alt="table"
-                className="my-12 w-[1000px] md:w-[1200px] max-w-full max-h-[600px] object-contain mx-auto"
-              /> */}
+              {/* Chart  */}
+              <DataGraphPage/>
+             
             </div>
             {/* Description Section */}
             <div>
