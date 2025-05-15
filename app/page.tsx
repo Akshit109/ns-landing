@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="flex text-white min-h-screen bg-[#080808] font-sans space-y-16 lg:space-y-24 flex-col ">
       <HeroPage />
-      <div className="p-4  lg:p-16">
+      <div className="p-4 space-y-16 lg:space-y-24 lg:p-16">
         <HomePage />
         <PieSection />
         <LatestPerformance />
