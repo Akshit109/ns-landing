@@ -19,12 +19,9 @@ const HomePage = () => {
       <img
         src="/logo.png"
         alt="Nifty Shloka Logo"
-        className="my-12 w-32 h-32 sm:w-36 sm:h-44 md:w-52 md:h-52 object-contain"
+        className="my-12 w-32 h-32 sm:w-36 sm:h-44 md:w-72 md:h-72 object-contain"
       />
-      {/* New Text */}
-      <p className="text-lg font-light md:text-4xl text-customLightGray max-w-3xl">
-        One Portfolio Solution Across All Asset Classes.
-      </p>
+   
     </motion.div>
   );
 };

@@ -23,7 +23,7 @@ const PieSection = () => {
               {/* Chart Placeholder replaced with table */}
               <div className="overflow-x-auto">
                 <table className="min-w-[600px] w-full text-center border-separate border-spacing-0 bg-ctaColor rounded-lg shadow-lg">
-                  <caption className="text-customLightGray text-2xl font-semibold mb-2 bg-black rounded-t-lg py-2">Why Nifty <span className="text-ctaColor">Shloka</span>?</caption>
+                  <caption className="text-customLightGray text-2xl font-semibold mb-2 bg-black rounded-lg py-2 caption-top text-center">Why Nifty <span className="text-ctaColor">Shloka</span>?</caption>
                   <thead>
                     <tr className="bg-ctaColor text-black">
                       <th className="border border-black px-6 py-3 text-lg font-bold"></th>

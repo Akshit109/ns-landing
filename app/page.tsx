@@ -8,21 +8,16 @@ import PartnerWithNs from "./components/home/PartnerWithNs";
 
 export default function Home() {
   return (
-    <main className="flex text-white min-h-screen bg-[#080808] font-sans flex-col p-4 pt-16 lg:p-16">
-      <div >
-         
-        <div className="space-y-16 lg:space-y-24">
-          <div className="-m-4 lg:-m-16">
-          <HeroPage />
-          </div>
-          <HomePage/>
+    <main className="flex text-white min-h-screen bg-[#080808] font-sans space-y-16 lg:space-y-24 flex-col ">
+      <HeroPage />
+      <div className="p-4  lg:p-16">
+        <HomePage />
         <PieSection />
         <LatestPerformance />
-        <WhyNs/>
+        <WhyNs />
         <PartnerWithNs />
-        <Disclaimer/>
-        </div>
+        <Disclaimer />
       </div>
     </main>
   );
-} 
+}
