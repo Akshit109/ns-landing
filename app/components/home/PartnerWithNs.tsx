@@ -1,25 +1,16 @@
 "use client"
 
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from "framer-motion";
 
 const PartnerWithNs = () => {
-  const [activeIndex, setActiveIndex] = useState<number>(-1);
   const points = [
     "Help us connect with potential clients",
     "Earn a fixed fee for each successful onboarding",
     "Offer your clients access to reporting & insights",
     "Leverage our diverse strategies and platform tools"
   ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex(prev => (prev + 1) % points.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <motion.div
@@ -30,35 +21,32 @@ const PartnerWithNs = () => {
     >
       <div className="h-[70vh] flex flex-col items-center justify-center text-center px-4">
         <motion.div
-          className="bg-cardBgColor border border-customDarkGray rounded-2xl shadow-[0_0_25px_rgba(176,176,176,0.4)]  p-8 w-full max-w-[1400px]"
+          className="w-full max-w-[1400px]"
         >
-          <p className="text-4xl md:text-6xl text-customDarkGray font-normal mb-6">
+          <p className="text-4xl md:text-6xl text-customLightGray font-normal mb-6">
             Partner With Nifty Shloka
           </p>
           <p className="text-lg md:text-2xl text-customLightGray mb-8">
             Become a Distribution Partner and grow with us:
           </p>
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-xl mx-auto">
             <ul className="space-y-6 text-lg font-light md:text-2xl text-customLightGray">
               {points.map((point, index) => (
-                <motion.li
-                  key={index}
-                  animate={{
-                    scale: activeIndex === index ? 1.1 : 1,
-                    color: activeIndex === index ? "#189606" : "#ebebeb",
-                    transition: { duration: 0.3 }
-                  }}
-                  className="flex items-center justify-center"
-                >
-                  {point}
-                </motion.li>
+                <li key={index} className="flex items-center justify-start gap-3">
+                  <div className="text-green-500 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#22c55e" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <span>{point}</span>
+                </li>
               ))}
             </ul>
           </div>
           <div className="mt-8 flex justify-center">
             <Link 
               href="/partner"
-              className="px-8 py-3 text-lg font-light text-customLightGray bg-black border border-black rounded-lg transition-all duration-700 ease-in-out hover:text-ctaColor inline-flex items-center gap-2"
+              className="inline-flex w-fit items-center gap-2 mt-2 px-4 py-2 bg-ctaColor text-customLightGray hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-lg shadow-sm font-medium"
             >
               Partner With Us
             </Link>
