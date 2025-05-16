@@ -8,12 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        cardBgColor: "#1B1C1A",
-        ctaColor:"#189606",
-        customYellow:"#D5B612",
-        customRed:"#C41125",
-        customDarkGray:"#B0B0B0",
-        customLightGray:"#ebebeb"
+        cardBgColor: "#1B1C1A",//custom black
+        ctaColor:"#189606",//green
+        customYellow:"#D5B612",//yellow
+        customRed:"#C41125",//red
+        customDarkGray:"#B0B0B0",//gray
+        customLightGray:"#ebebeb"//light gray
 
       }
     },

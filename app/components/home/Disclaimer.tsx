@@ -9,7 +9,7 @@ const Disclaimer = () => {
           className="flex items-center justify-center text-center w-full h-72 my-16 md:my-32 bg-cover bg-center"
           style={{ backgroundImage: 'url("/footer_pic.webp")' }}
         >
-          <p className="text-xl md:text-4xl font-light italic text-customLightGray px-4 py-2 rounded">
+          <p className="text-xl md:text-4xl font-light italic  px-4 py-2 rounded">
             "In God we trust, all others must bring data."
           </p>
         </div>
