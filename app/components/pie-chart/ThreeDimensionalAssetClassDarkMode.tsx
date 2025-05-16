@@ -37,7 +37,7 @@ const ThreeDimensionalAssetClassDarkMode = ({
     const width = 900;
     const canvasHeight = 500;
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x1a1a1a); // Dark background
+    scene.background = new THREE.Color(0x080808); // Changed to very dark black #080808
 
     const camera = new THREE.PerspectiveCamera(
       40,
@@ -104,7 +104,9 @@ const ThreeDimensionalAssetClassDarkMode = ({
     pieGroup.position.y = 0.7; // Shift the entire group upwards
 
     scene.add(pieGroup);
-    pieGroup.rotation.x = -Math.PI / 2; // Add initial vertical rotation
+    pieGroup.rotation.x = Math.PI / 6; // 30 degrees from bottom (π/6 radians = 30 degrees)
+    pieGroup.rotation.y = Math.PI / 8; // Slight Y axis rotation
+    pieGroup.rotation.z = 0; // No Z rotation
 
     // Define a common material for the sides (height) of all segments
     const sideMaterial = new THREE.MeshBasicMaterial({
@@ -280,7 +282,7 @@ const ThreeDimensionalAssetClassDarkMode = ({
         style={{
           width: 900,
           height: 500,
-          backgroundColor: '#1a1a1a', // Dark theme container background
+          backgroundColor: '#080808', // Changed to very dark black #080808
           touchAction: 'none',
         }} // touchAction none for OrbitControls
       />

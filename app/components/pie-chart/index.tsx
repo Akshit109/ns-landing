@@ -12,7 +12,7 @@ const PieChart: React.FC<PieChartProps> = ({ data = summary }) => {
   
 
   return (
-    <div className="bg-cardBgColor rounded-xl p-6 shadow-lg">
+    <div >
       
       {/* Three.js Pie Chart */}
       <ThreeDimensionalAssetClassDarkMode summary={data} />
