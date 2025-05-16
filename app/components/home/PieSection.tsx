@@ -6,6 +6,7 @@ import PieChartSection from '../pie-chart';
 const PieSection = () => {
   return (
     <motion.div
+      id="pie-section"
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.5, ease: "easeOut" }}

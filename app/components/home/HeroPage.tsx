@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Navbar from "./Navbar";
 
 const HeroPage = () => {
   const textVariants = {
@@ -23,6 +24,7 @@ const HeroPage = () => {
         className="absolute inset-0 w-screen bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: 'url("/hero_bg.webp")' }}
       />
+      <Navbar />
       <div className="relative min-h-screen w-screen flex flex-col items-center justify-center">
         <div className="w-[90%] max-w-6xl mx-auto text-left">
           <motion.h1 

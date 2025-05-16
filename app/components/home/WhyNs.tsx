@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const WhyNs = () => {
   return (
-    <div className="h-[70vh]  py-12 px-4">
+    <div id="why-ns" className="h-[70vh]  py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Text Section - Left side on MD+ */}

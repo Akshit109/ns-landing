@@ -5,7 +5,7 @@ import DataGraphPage from "../data-graph";
 
 const PieSection = () => {
   return (
-    <div>
+    <div id="latest-performance">
       <div className="flex flex-col items-center justify-center text-center px-4 ">
         <div className="grid grid-cols-12 gap-12 md:gap-24 w-full max-w-[1400px]">
           {/* performance screenshot section */}

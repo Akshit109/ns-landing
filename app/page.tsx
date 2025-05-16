@@ -5,6 +5,7 @@ import Disclaimer from "./components/home/Disclaimer";
 import HeroPage from "./components/home/HeroPage";
 import WhyNs from "./components/home/WhyNs";
 import PartnerWithNs from "./components/home/PartnerWithNs";
+import ScrollToTop from "./components/home/ScrollToTop";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <PartnerWithNs />
         <Disclaimer />
       </div>
+      <ScrollToTop />
     </main>
   );
 }
