@@ -10,16 +10,16 @@ const HomePage = () => {
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
       viewport={{ once: false }}
-      className="h-[70vh] flex flex-col gap-10 items-center justify-center"
+      className="min-h-[50vh] md:h-[70vh] flex flex-col gap-6 md:gap-10 items-center justify-center px-4"
     >
-      <p className="text-lg font-light md:text-4xl text-customLightGray max-w-5xl">
+      <p className="text-lg sm:text-xl font-light md:text-4xl text-customLightGray max-w-5xl text-center">
         Your entire investing journey—simplified into one modern portfolio.
       </p>
       {/* Logo */}
       <img
         src="/logo.png"
         alt="Nifty Shloka Logo"
-        className="my-12 w-32 h-32 sm:w-36 sm:h-44 md:w-72 md:h-72 object-contain"
+        className="my-6 md:my-12 w-28 h-28 sm:w-32 sm:h-32 md:w-72 md:h-72 object-contain"
       />
    
     </motion.div>

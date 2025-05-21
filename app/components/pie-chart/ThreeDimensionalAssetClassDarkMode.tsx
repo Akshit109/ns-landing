@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { calculateAssetClassPieChartData } from './utils';
@@ -23,6 +23,23 @@ const ThreeDimensionalAssetClassDarkMode = ({
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if the screen is mobile-sized
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!containerRef.current || !pieChartData || pieChartData.length === 0)
@@ -34,8 +51,8 @@ const ThreeDimensionalAssetClassDarkMode = ({
     }
 
     // Setup Three.js scene
-    const width = 900;
-    const canvasHeight = 500;
+    const width = isMobile ? Math.min(320, window.innerWidth - 40) : 900;
+    const canvasHeight = isMobile ? 250 : 500;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x080808); // Changed to very dark black #080808
 
@@ -45,7 +62,7 @@ const ThreeDimensionalAssetClassDarkMode = ({
       0.1,
       1000
     );
-    camera.position.set(0, 0.7, 8);
+    camera.position.set(0, 0.7, isMobile ? 10 : 8); // Adjust camera on mobile
     camera.lookAt(0, 0.7, 0);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -77,8 +94,8 @@ const ThreeDimensionalAssetClassDarkMode = ({
     const sortedData = [...pieChartData].sort((a, b) => b.value - a.value);
 
     // Pie chart parameters
-    const radius = 2;
-    const segmentHeight = 0.4;
+    const radius = isMobile ? 1.5 : 2; // Smaller on mobile
+    const segmentHeight = isMobile ? 0.3 : 0.4; // Thinner on mobile
     const segments = 64; // Smoothness of the curved edges
 
     // Define segment colors based on the provided image/legend
@@ -191,7 +208,7 @@ const ThreeDimensionalAssetClassDarkMode = ({
     legendContainer.style.padding = '5px 10px'; // Adjust padding
     legendContainer.style.borderRadius = '8px';
     legendContainer.style.color = 'white'; // Dark theme legend color
-    legendContainer.style.fontSize = '12px'; // Slightly smaller legend font
+    legendContainer.style.fontSize = isMobile ? '10px' : '12px'; // Smaller on mobile
     legendContainer.style.pointerEvents = 'none'; // Prevent legend from blocking controls
     containerRef.current.appendChild(legendContainer);
 
@@ -199,12 +216,12 @@ const ThreeDimensionalAssetClassDarkMode = ({
       const item = document.createElement('div');
       item.style.display = 'flex';
       item.style.alignItems = 'center';
-      item.style.marginRight = '15px'; // Spacing for row layout
+      item.style.marginRight = isMobile ? '8px' : '15px'; // Spacing for row layout, smaller on mobile
       item.style.marginBottom = '5px'; // Spacing if wrapping occurs
 
       const colorBox = document.createElement('div');
-      colorBox.style.width = '12px'; // Smaller box
-      colorBox.style.height = '12px';
+      colorBox.style.width = isMobile ? '8px' : '12px'; // Smaller box on mobile
+      colorBox.style.height = isMobile ? '8px' : '12px';
       colorBox.style.backgroundColor = `#${segmentColors[
         index % segmentColors.length
       ]
@@ -225,12 +242,12 @@ const ThreeDimensionalAssetClassDarkMode = ({
     const fnoItem = document.createElement('div');
     fnoItem.style.display = 'flex';
     fnoItem.style.alignItems = 'center';
-    fnoItem.style.marginRight = '15px'; // Spacing for row layout
+    fnoItem.style.marginRight = isMobile ? '8px' : '15px'; // Spacing for row layout, smaller on mobile
     fnoItem.style.marginBottom = '5px'; // Spacing if wrapping occurs
 
     const fnoColorBox = document.createElement('div');
-    fnoColorBox.style.width = '12px'; // Smaller box
-    fnoColorBox.style.height = '12px';
+    fnoColorBox.style.width = isMobile ? '8px' : '12px'; // Smaller box on mobile
+    fnoColorBox.style.height = isMobile ? '8px' : '12px';
     fnoColorBox.style.backgroundColor = `#${sideMaterial.color.getHexString()}`; // Use side color
     fnoColorBox.style.marginRight = '5px'; // Smaller margin
     fnoColorBox.style.borderRadius = '2px';
@@ -249,45 +266,14 @@ const ThreeDimensionalAssetClassDarkMode = ({
         if (renderer.domElement) {
           containerRef.current.removeChild(renderer.domElement);
         }
-        if (
-          legendContainer &&
-          legendContainer.parentNode === containerRef.current
-        ) {
+        if (legendContainer && legendContainer.parentNode === containerRef.current) {
           containerRef.current.removeChild(legendContainer);
         }
       }
-      // Dispose Three.js objects (important for memory management)
-      scene.traverse((object) => {
-        if (object instanceof THREE.Mesh) {
-          if (object.geometry) {
-            object.geometry.dispose();
-          }
-          if (Array.isArray(object.material)) {
-            object.material.forEach((material) => material.dispose());
-          } else if (object.material) {
-            object.material.dispose();
-          }
-        }
-      });
-      renderer.dispose();
-      controls.dispose();
     };
-  }, [pieChartData, summary]); // Removed theme dependency
+  }, [pieChartData, isMobile]); // Re-render when isMobile changes
 
-  return (
-    <div className="mt-5 flex flex-col items-center">
-      <div
-        ref={containerRef}
-        className="relative" // Removed flex/justify-center as canvas positioning handles it
-        style={{
-          width: 900,
-          height: 500,
-          backgroundColor: '#080808', // Changed to very dark black #080808
-          touchAction: 'none',
-        }} // touchAction none for OrbitControls
-      />
-    </div>
-  );
+  return <div ref={containerRef} className="w-full flex justify-center"></div>;
 };
 
 export default ThreeDimensionalAssetClassDarkMode;

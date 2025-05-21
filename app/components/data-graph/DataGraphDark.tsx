@@ -23,13 +23,13 @@ const LastUpdatedStatusDisplay: React.FC<{
 }> = ({ lastUpdatedDate }) => {
   if (!lastUpdatedDate) {
     return (
-      <span className="text-yellow-600">No date information available</span>
+      <span className="text-yellow-600 text-xs sm:text-sm">No date information available</span>
     );
   }
 
   const isOld = isDateOlderThanSevenDays(lastUpdatedDate);
   return (
-    <span className={isOld ? 'text-red-600' : 'dark:text-gray-300'}>
+    <span className={`${isOld ? 'text-red-600' : 'dark:text-gray-300'} text-xs sm:text-sm`}>
       Last Updated: {lastUpdatedDate}
     </span>
   );
@@ -363,15 +363,44 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
       // Style legend text
       legend.labels.template.setAll({
         fill: textColor,
+        fontSize: window.innerWidth < 640 ? 10 : 12, // Smaller font on mobile
       });
 
       // Customize legend markers
       legend.markers.template.setAll({
-        width: 15,
-        height: 15,
+        width: window.innerWidth < 640 ? 10 : 15,
+        height: window.innerWidth < 640 ? 10 : 15,
       });
 
       legend.data.setAll(chart.series.values);
+
+      // Common tooltip content - simplified for mobile
+      const getTooltipText = (series: string) => {
+        return window.innerWidth < 640 ? 
+          `[bold]{name}[/]: [bold]{valueY.formatNumber('#,###.##')}[/]` :
+          `[bold]{name}[/]
+Date: [bold]{valueX.formatDate('yyyy-MM-dd')}[/]
+Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
+      };
+
+      // Update tooltip settings for both series
+      niftySeries.get('tooltip')?.set('labelText', getTooltipText('Nifty50'));
+      nsBundleSeries.get('tooltip')?.set('labelText', getTooltipText('NS Bundle'));
+      
+      // Make date axis labels responsive
+      dateAxis.get('renderer').labels.template.setAll({
+        fill: textColor,
+        fontSize: window.innerWidth < 640 ? 10 : 12,
+        rotation: window.innerWidth < 640 ? -45 : 0,
+        centerY: window.innerWidth < 640 ? am5.p50 : am5.p0,
+        centerX: window.innerWidth < 640 ? am5.p100 : am5.p50,
+      });
+
+      // Make value axis labels responsive
+      valueAxis.get('renderer').labels.template.setAll({
+        fill: textColor,
+        fontSize: window.innerWidth < 640 ? 10 : 12,
+      });
 
       // Animation and zoom
       chart.appear(1000, 100);
@@ -410,6 +439,47 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
         }, 2000)
       );
 
+      // Handle window resize
+      const handleResize = () => {
+        if (chartRef.current) {
+          // Update chart size
+          chartRef.current.resize();
+          
+          // Update text sizes based on screen width
+          const isMobile = window.innerWidth < 640;
+          
+          // Update legend text sizes
+          legend.labels.template.setAll({
+            fontSize: isMobile ? 10 : 12,
+          });
+          
+          // Update legend marker sizes
+          legend.markers.template.setAll({
+            width: isMobile ? 10 : 15,
+            height: isMobile ? 10 : 15,
+          });
+          
+          // Update axis label sizes and rotation
+          dateAxis.get('renderer').labels.template.setAll({
+            fontSize: isMobile ? 10 : 12,
+            rotation: isMobile ? -45 : 0,
+            centerY: isMobile ? am5.p50 : am5.p0,
+            centerX: isMobile ? am5.p100 : am5.p50,
+          });
+          
+          valueAxis.get('renderer').labels.template.setAll({
+            fontSize: isMobile ? 10 : 12,
+          });
+          
+          // Update tooltips
+          niftySeries.get('tooltip')?.set('labelText', getTooltipText('Nifty50'));
+          nsBundleSeries.get('tooltip')?.set('labelText', getTooltipText('NS Bundle'));
+        }
+      };
+
+      // Add window resize listener
+      window.addEventListener('resize', handleResize);
+      
       // Continue with ResizeObserver setup
       const resizeObserver = new ResizeObserver(() => {
         if (chartRef.current) {
@@ -425,6 +495,9 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
       return () => {
         // Clear all timeout IDs
         timeoutIds.forEach(id => window.clearTimeout(id));
+        
+        // Remove resize listener
+        window.removeEventListener('resize', handleResize);
         
         // Stop observing
         resizeObserver.disconnect();
@@ -450,12 +523,12 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
   };
 
   return (
-    <div className="p-4 dark:bg-black dark:text-white">
+    <div className="p-2 sm:p-4 dark:bg-black dark:text-white">
       {/* <h2 className="text-center  text-xl dark:text-white">
         Portfolio Performance
       </h2> */}
-      <div className="mb-4">
-        <ButtonGroup className="mr-4 ">
+      <div className="mb-2 sm:mb-4">
+        <ButtonGroup className="mr-4 flex flex-wrap gap-1 sm:flex-nowrap">
           {['Lifetime', '3M', '6M', '1Y', 'ALL'].map((value) => (
             <ToggleButton
               key={value}
@@ -465,6 +538,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
               value={value}
               checked={range === value}
               onChange={handleRangeChange}
+              className="text-sm sm:text-base"
             >
               {value}
             </ToggleButton>
@@ -477,11 +551,12 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
         id="chartdivportfolio"
         style={{ 
           width: '100%', 
-          height: '550px',
+          height: '350px',
           minWidth: '100%',
-          minHeight: '550px',
+          minHeight: '350px',
           position: 'relative'
         }}
+        className="sm:h-[450px] md:h-[550px] sm:min-h-[450px] md:min-h-[550px]"
       >
         {!isChartReady && (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -489,11 +564,11 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
           </div>
         )}
       </div>
-      <div className="text-right mt-2">
+      <div className="text-right mt-1 sm:mt-2">
         {data ? (
           <LastUpdatedStatusDisplay lastUpdatedDate={lastUpdated} />
         ) : (
-          <span className="text-red-600">No data available</span>
+          <span className="text-red-600 text-xs sm:text-sm">No data available</span>
         )}
       </div>
     </div>

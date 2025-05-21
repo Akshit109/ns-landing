@@ -9,15 +9,10 @@ interface PieChartProps {
 }
 
 const PieChart: React.FC<PieChartProps> = ({ data = summary }) => {
-  
-
   return (
-    <div >
-      
+    <div className="w-full max-w-full overflow-x-auto md:overflow-visible -mx-4 md:mx-0 px-4 md:px-0">
       {/* Three.js Pie Chart */}
       <ThreeDimensionalAssetClassDarkMode summary={data} />
-      
-      
     </div>
   );
 };

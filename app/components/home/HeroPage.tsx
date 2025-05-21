@@ -28,9 +28,9 @@ const HeroPage = () => {
         <Navbar />
       </div>
       <div className="relative min-h-screen w-screen flex flex-col items-center justify-center">
-        <div className="w-[90%] max-w-6xl mx-auto text-left">
+        <div className="w-[90%] max-w-6xl mx-auto text-left px-4">
           <motion.h1 
-            className="text-5xl md:text-[9rem] font-bold mb-6 drop-shadow-xl bg-gradient-to-r from-white to-gray-700 bg-clip-text text-transparent leading-[1.1] pb-2 tracking-[0.15em]"
+            className="text-4xl sm:text-5xl md:text-[9rem] font-bold mb-4 md:mb-6 drop-shadow-xl bg-gradient-to-r from-white to-gray-700 bg-clip-text text-transparent leading-[1.1] pb-2 tracking-[0.15em]"
             variants={textVariants}
             initial="hidden"
             animate="visible"
@@ -39,7 +39,7 @@ const HeroPage = () => {
             EVERYTHING
           </motion.h1>
           <motion.h1 
-            className="text-5xl md:text-[9rem] font-bold mb-6 drop-shadow-xl bg-gradient-to-r from-white to-gray-700 bg-clip-text text-transparent leading-[1.1] pb-2 tracking-widest"
+            className="text-4xl sm:text-5xl md:text-[9rem] font-bold mb-4 md:mb-6 drop-shadow-xl bg-gradient-to-r from-white to-gray-700 bg-clip-text text-transparent leading-[1.1] pb-2 tracking-widest"
             variants={textVariants}
             initial="hidden"
             animate="visible"
@@ -48,7 +48,7 @@ const HeroPage = () => {
             EVERYWHERE
           </motion.h1>
           <motion.h1 
-            className="text-5xl md:text-[9rem] font-bold mb-6 drop-shadow-xl bg-gradient-to-r from-white to-gray-700 bg-clip-text text-transparent leading-[1.1] pb-2 tracking-[0.13em]"
+            className="text-4xl sm:text-5xl md:text-[9rem] font-bold mb-4 md:mb-6 drop-shadow-xl bg-gradient-to-r from-white to-gray-700 bg-clip-text text-transparent leading-[1.1] pb-2 tracking-[0.13em]"
             variants={textVariants}
             initial="hidden"
             animate="visible"
@@ -58,7 +58,7 @@ const HeroPage = () => {
           </motion.h1>
         </div>
         <motion.h1 
-          className="text-4xl md:text-5xl font-normal mb-6 drop-shadow-xl bg-gradient-to-r md:-ml-28 from-white to-gray-700  bg-clip-text text-transparent  pb-2 mt-10 "
+          className="text-2xl sm:text-3xl md:text-5xl font-normal mb-4 md:mb-6 drop-shadow-xl bg-gradient-to-r md:-ml-28 from-white to-gray-700 bg-clip-text text-transparent pb-2 mt-6 md:mt-10 px-4 text-center md:text-left"
           variants={textVariants}
           initial="hidden"
           animate="visible"

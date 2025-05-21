@@ -12,16 +12,17 @@ const PieSection = () => {
       transition={{ duration: 1.5, ease: "easeOut" }}
       viewport={{ once: false }}
     >
-      <div className="min-h-screen  flex flex-col items-center justify-center text-center px-4">
-        <h2 className="text-4xl md:text-6xl text-customLightGray font-normal mb-6">
+      <div className="min-h-[80vh] md:min-h-screen flex flex-col items-center justify-center text-center px-4 py-8 md:py-0">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl text-customLightGray font-normal mb-4 md:mb-6">
           Built for Modern Investors
         </h2>
-        <p className="text-lg font-light md:text-2xl text-customLightGray max-w-4xl">
+        <p className="text-base sm:text-lg font-light md:text-2xl text-customLightGray max-w-4xl mb-6 md:mb-8">
           A new-age Wealth Tech Platform to enable a Unified Investing Experience across a <br className='hidden md:block'/> multi-asset portfolio—powered by Zerodha.
         </p>
         {/* Animated Pie Chart Container (currently with image) */}
-        <PieChartSection />
-
+        <div className="w-full max-w-full overflow-x-auto md:overflow-visible">
+          <PieChartSection />
+        </div>
       </div>
     </motion.div>
   )
