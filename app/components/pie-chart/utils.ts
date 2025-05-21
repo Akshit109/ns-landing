@@ -28,26 +28,33 @@ export function calculateHoldingsSummary(
 ) {
   const combinedData = [...mfHoldingsData.data, ...equityHoldingsData.data];
 
-  const summary = combinedData.reduce((acc: any, row: any) => {
-    const assetClassField = row['ASSET CLASS'];
-    const invested =
-      (parseFloatValue(row['Quantity Available']) +
-        parseFloatValue(row['Quantity Pledged (Margin)'])) *
-      parseFloatValue(row['Average Price']);
-    const presentValue =
-      (parseFloatValue(row['Quantity Available']) +
-        parseFloatValue(row['Quantity Pledged (Margin)'])) *
-      parseFloatValue(row['Previous Closing Price']);
+  type SummaryType = {
+    [key: string]: { totalInvested: number; presentValue: number };
+  };
 
-    if (!acc[assetClassField]) {
-      acc[assetClassField] = { totalInvested: 0, presentValue: 0 };
-    }
+  const summary: SummaryType = combinedData.reduce(
+    (acc: SummaryType, row: any) => {
+      const assetClassField = row['ASSET CLASS'];
+      const invested =
+        (parseFloatValue(row['Quantity Available']) +
+          parseFloatValue(row['Quantity Pledged (Margin)'])) *
+        parseFloatValue(row['Average Price']);
+      const presentValue =
+        (parseFloatValue(row['Quantity Available']) +
+          parseFloatValue(row['Quantity Pledged (Margin)'])) *
+        parseFloatValue(row['Previous Closing Price']);
 
-    acc[assetClassField].totalInvested += invested;
-    acc[assetClassField].presentValue += presentValue;
+      if (!acc[assetClassField]) {
+        acc[assetClassField] = { totalInvested: 0, presentValue: 0 };
+      }
 
-    return acc;
-  }, {});
+      acc[assetClassField].totalInvested += invested;
+      acc[assetClassField].presentValue += presentValue;
+
+      return acc;
+    },
+    {}
+  );
 
   summary.CASH = {
     totalInvested: cashData.latestCashValue,
@@ -94,7 +101,10 @@ export function calculateAssetClassPieChartData(
   return pieChartData;
 }
 
-export function getLongTermQuantity(mappingData, symbol) {
+export function getLongTermQuantity(
+  mappingData: Array<{ symbol: string; long_term_quantity: number }>,
+  symbol: string
+) {
   const longTermHolding = mappingData?.find((item) => item.symbol === symbol);
   return longTermHolding ? longTermHolding.long_term_quantity : 0;
 }
