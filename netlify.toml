@@ -5,10 +5,23 @@
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
 
-# Handle Next.js routing
+# Default Next.js 404 page
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/_next/static/*"
+  to = "/static/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/_next/image*"
+  to = "/.netlify/image-functions"
+  status = 200
+
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.netlify/functions/next"
   status = 200
 
 # Prevent access to Next.js internal folders
@@ -16,4 +29,4 @@
   for = "/_next/*"
   [headers.values]
     X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block" 
+    X-XSS-Protection = "1; mode=block"
