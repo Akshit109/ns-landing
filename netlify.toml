@@ -1,28 +1,27 @@
 [build]
-  command = "next build"
+  command = "npm run build"
   publish = ".next"
+  ignore = "git diff --quiet HEAD^ HEAD ./"
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
 
-# Default Next.js 404 page
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+# Since we're using Next.js export, we don't need the Next.js plugin
+# [[plugins]]
+#   package = "@netlify/plugin-nextjs"
 
+# Handle static files
 [[redirects]]
   from = "/_next/static/*"
   to = "/static/:splat"
   status = 200
 
-[[redirects]]
-  from = "/_next/image*"
-  to = "/.netlify/image-functions"
-  status = 200
-
+# Handle client-side routing
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/next"
+  to = "/index.html"
   status = 200
+  force = false
 
 # Prevent access to Next.js internal folders
 [[headers]]

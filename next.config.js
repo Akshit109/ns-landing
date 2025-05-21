@@ -9,6 +9,14 @@ const nextConfig = {
     // Ignore ESLint errors during build
     ignoreDuringBuilds: true,
   },
+  // Output in a format compatible with Netlify
+  output: 'export',
+  // Images optimization needs to be handled differently with 'export'
+  images: {
+    unoptimized: true,
+  },
+  // Don't generate a 404 page as Netlify will handle it
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
