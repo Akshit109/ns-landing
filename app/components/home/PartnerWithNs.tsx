@@ -47,7 +47,7 @@ const PartnerWithNs = () => {
           <div className="mt-8 flex justify-center">
             <Link 
               href="/partner"
-              className="inline-flex w-fit items-center gap-2 mt-2 px-4 py-2 bg-ctaColor text-customLightGray hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-lg shadow-sm font-medium"
+              className="inline-flex w-fit items-center gap-2 mt-2 px-4 py-2 bg-ctaColor text-customLightGray hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium no-underline"
             >
               Partner With Us
             </Link>

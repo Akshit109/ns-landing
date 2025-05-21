@@ -19,12 +19,14 @@ const HeroPage = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-screen">
+    <div className="relative min-h-screen w-screen overflow-x-hidden">
       <div 
         className="absolute inset-0 w-screen bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: 'url("/hero_bg.webp")' }}
       />
-      <Navbar />
+      <div className="w-full flex justify-center">
+        <Navbar />
+      </div>
       <div className="relative min-h-screen w-screen flex flex-col items-center justify-center">
         <div className="w-[90%] max-w-6xl mx-auto text-left">
           <motion.h1 
