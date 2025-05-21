@@ -23,13 +23,15 @@ const LastUpdatedStatusDisplay: React.FC<{
 }> = ({ lastUpdatedDate }) => {
   if (!lastUpdatedDate) {
     return (
-      <span className="text-yellow-600 text-xs sm:text-sm">No date information available</span>
+      <span className='text-yellow-600 text-xs sm:text-sm'>
+        No date information available
+      </span>
     );
   }
 
   const isOld = isDateOlderThanSevenDays(lastUpdatedDate);
   return (
-    <span className={`${isOld ? 'text-red-600' : 'dark:text-gray-300'} text-xs sm:text-sm`}>
+    <span className={`dark:text-gray-300 text-xs sm:text-sm`}>
       Last Updated: {lastUpdatedDate}
     </span>
   );
@@ -81,7 +83,7 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
     const timer = setTimeout(() => {
       setIsChartReady(true);
     }, 300); // 300ms delay
-    
+
     return () => clearTimeout(timer);
   }, []); // Empty dependency array - runs only once on mount
 
@@ -130,7 +132,7 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
     if (!filteredData || !chartContainerRef.current || !isChartReady) {
       return;
     }
-    
+
     // Clean up any existing chart before creating a new one
     if (chartRef.current) {
       chartRef.current.dispose();
@@ -221,15 +223,15 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
           wheelY: 'zoomX',
           pinchZoomX: true,
           maxTooltipDistance: 0,
-          paddingLeft: 0,  // Ensure no extra padding
+          paddingLeft: 0, // Ensure no extra padding
           paddingRight: 0, // Ensure no extra padding
         })
       );
 
       // Explicitly set the chart and container to take maximum space
-      chart.root.dom.style.width = "100%";
-      chart.root.dom.style.height = "100%";
-      
+      chart.root.dom.style.width = '100%';
+      chart.root.dom.style.height = '100%';
+
       // Set container to occupy full space
       container.setAll({
         width: am5.p100,
@@ -376,17 +378,19 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
 
       // Common tooltip content - simplified for mobile
       const getTooltipText = (series: string) => {
-        return window.innerWidth < 640 ? 
-          `[bold]{name}[/]: [bold]{valueY.formatNumber('#,###.##')}[/]` :
-          `[bold]{name}[/]
+        return window.innerWidth < 640
+          ? `[bold]{name}[/]: [bold]{valueY.formatNumber('#,###.##')}[/]`
+          : `[bold]{name}[/]
 Date: [bold]{valueX.formatDate('yyyy-MM-dd')}[/]
 Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
       };
 
       // Update tooltip settings for both series
       niftySeries.get('tooltip')?.set('labelText', getTooltipText('Nifty50'));
-      nsBundleSeries.get('tooltip')?.set('labelText', getTooltipText('NS Bundle'));
-      
+      nsBundleSeries
+        .get('tooltip')
+        ?.set('labelText', getTooltipText('NS Bundle'));
+
       // Make date axis labels responsive
       dateAxis.get('renderer').labels.template.setAll({
         fill: textColor,
@@ -408,10 +412,10 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
 
       // Multiple resize attempts with different delays
       const timeoutIds: number[] = [];
-      
+
       // Immediate resize
       root.resize();
-      
+
       // After a short delay (for the initial layout to settle)
       timeoutIds.push(
         window.setTimeout(() => {
@@ -420,7 +424,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
           }
         }, 50)
       );
-      
+
       // After animation completes
       timeoutIds.push(
         window.setTimeout(() => {
@@ -429,7 +433,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
           }
         }, 1200) // Just after the 1000ms appear animation
       );
-      
+
       // One more time after everything should be stable
       timeoutIds.push(
         window.setTimeout(() => {
@@ -444,21 +448,21 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
         if (chartRef.current) {
           // Update chart size
           chartRef.current.resize();
-          
+
           // Update text sizes based on screen width
           const isMobile = window.innerWidth < 640;
-          
+
           // Update legend text sizes
           legend.labels.template.setAll({
             fontSize: isMobile ? 10 : 12,
           });
-          
+
           // Update legend marker sizes
           legend.markers.template.setAll({
             width: isMobile ? 10 : 15,
             height: isMobile ? 10 : 15,
           });
-          
+
           // Update axis label sizes and rotation
           dateAxis.get('renderer').labels.template.setAll({
             fontSize: isMobile ? 10 : 12,
@@ -466,20 +470,24 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
             centerY: isMobile ? am5.p50 : am5.p0,
             centerX: isMobile ? am5.p100 : am5.p50,
           });
-          
+
           valueAxis.get('renderer').labels.template.setAll({
             fontSize: isMobile ? 10 : 12,
           });
-          
+
           // Update tooltips
-          niftySeries.get('tooltip')?.set('labelText', getTooltipText('Nifty50'));
-          nsBundleSeries.get('tooltip')?.set('labelText', getTooltipText('NS Bundle'));
+          niftySeries
+            .get('tooltip')
+            ?.set('labelText', getTooltipText('Nifty50'));
+          nsBundleSeries
+            .get('tooltip')
+            ?.set('labelText', getTooltipText('NS Bundle'));
         }
       };
 
       // Add window resize listener
       window.addEventListener('resize', handleResize);
-      
+
       // Continue with ResizeObserver setup
       const resizeObserver = new ResizeObserver(() => {
         if (chartRef.current) {
@@ -494,11 +502,11 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       return () => {
         // Clear all timeout IDs
-        timeoutIds.forEach(id => window.clearTimeout(id));
-        
+        timeoutIds.forEach((id) => window.clearTimeout(id));
+
         // Remove resize listener
         window.removeEventListener('resize', handleResize);
-        
+
         // Stop observing
         resizeObserver.disconnect();
 
@@ -523,22 +531,22 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
   };
 
   return (
-    <div className="p-2 sm:p-4 dark:bg-black dark:text-white">
+    <div className='p-2 sm:p-4 dark:bg-black dark:text-white'>
       {/* <h2 className="text-center  text-xl dark:text-white">
         Portfolio Performance
       </h2> */}
-      <div className="mb-2 sm:mb-4">
-        <ButtonGroup className="mr-4 flex flex-wrap gap-1 sm:flex-nowrap">
-          {['Lifetime', '3M', '6M', '1Y', 'ALL'].map((value) => (
+      <div className='mb-2 sm:mb-4'>
+        <ButtonGroup className='mr-4 flex flex-wrap gap-1 sm:flex-nowrap'>
+          {['Lifetime', '3M', '6M', '1Y'].map((value) => (
             <ToggleButton
               key={value}
               id={`range-${value}`}
-              type="radio"
-              variant="outline-primary"
+              type='radio'
+              variant='outline-primary'
               value={value}
               checked={range === value}
               onChange={handleRangeChange}
-              className="text-sm sm:text-base"
+              className='text-sm sm:text-base'
             >
               {value}
             </ToggleButton>
@@ -548,27 +556,29 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
       {/* Assign the ref to the chart container div */}
       <div
         ref={chartContainerRef}
-        id="chartdivportfolio"
-        style={{ 
-          width: '100%', 
+        id='chartdivportfolio'
+        style={{
+          width: '100%',
           height: '350px',
           minWidth: '100%',
           minHeight: '350px',
-          position: 'relative'
+          position: 'relative',
         }}
-        className="sm:h-[450px] md:h-[550px] sm:min-h-[450px] md:min-h-[550px]"
+        className='sm:h-[450px] md:h-[550px] sm:min-h-[450px] md:min-h-[550px]'
       >
         {!isChartReady && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-lg">Loading chart...</div>
+          <div className='absolute inset-0 flex items-center justify-center'>
+            <div className='text-lg'>Loading chart...</div>
           </div>
         )}
       </div>
-      <div className="text-right mt-1 sm:mt-2">
+      <div className='text-right mt-1 sm:mt-2'>
         {data ? (
           <LastUpdatedStatusDisplay lastUpdatedDate={lastUpdated} />
         ) : (
-          <span className="text-red-600 text-xs sm:text-sm">No data available</span>
+          <span className='text-red-600 text-xs sm:text-sm'>
+            No data available
+          </span>
         )}
       </div>
     </div>
