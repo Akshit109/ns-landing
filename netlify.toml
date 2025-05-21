@@ -1,0 +1,19 @@
+[build]
+  command = "next build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Handle Next.js routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Prevent access to Next.js internal folders
+[[headers]]
+  for = "/_next/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block" 
