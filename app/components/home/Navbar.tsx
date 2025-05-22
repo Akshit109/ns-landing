@@ -19,7 +19,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="w-full flex justify-center absolute top-4 z-20 px-4">
+    <div className="w-full  flex justify-center absolute top-4 z-20 px-4">
       <nav className="flex items-center justify-between px-4 sm:px-8 py-2 bg-white rounded-full shadow-md max-w-4xl w-full">
         <div className="flex items-center">
           <Image 
