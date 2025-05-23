@@ -9,9 +9,9 @@ module.exports = {
     extend: {
       colors: {
         cardBgColor: "#1B1C1A",//custom black
-        ctaColor:"#189606",//green
-        customYellow:"#D5B612",//yellow
-        customRed:"#C41125",//red
+        ctaColor:"#86E75D",//green
+        customYellow:"#EDCF2B",//yellow
+        customRed:"#EB1E35",//red
         customDarkGray:"#B0B0B0",//gray
         customLightGray:"#ebebeb"//light gray
 

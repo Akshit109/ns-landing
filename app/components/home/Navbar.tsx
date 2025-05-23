@@ -6,21 +6,26 @@ import { Link as ScrollLink } from "react-scroll";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const toggleDesktopMenu = () => {
+    setIsDesktopMenuOpen(!isDesktopMenuOpen);
+  };
+
   const navItems = [
-    { name: "Pie", target: "pie-section" },
+    { name: "Home", target: "pie-section" },
     { name: "Performance", target: "latest-performance" },
     { name: "Why NS", target: "why-ns" },
     { name: "Partner with NS", target: "partner-with-ns" }
   ];
 
   return (
-    <div className="w-full  flex justify-center absolute top-4 z-20 px-4">
-      <nav className="flex items-center justify-between px-4 sm:px-8 py-2 bg-white rounded-full shadow-md max-w-4xl w-full">
+    <div className="w-full flex justify-center absolute top-4 z-20 px-4">
+      <nav className={`flex items-center justify-between px-4 sm:px-8 py-2 bg-white rounded-full shadow-md max-w-4xl w-full transition-all duration-500 ease-in-out`}>
         <div className="flex items-center">
           <Image 
             src="/logo.png" 
@@ -31,7 +36,8 @@ const Navbar = () => {
           />
         </div>
         
-        <div className="hidden md:flex items-center gap-8 ml-4">
+        {/* Desktop menu - now visible within navbar when toggled */}
+        <div className={`hidden md:flex items-center gap-8 ml-4 ${isDesktopMenuOpen ? 'opacity-100 max-w-[500px]' : 'opacity-0 max-w-0 overflow-hidden'} transition-all duration-500 ease-in-out`}>
           {navItems.map((item, index) => (
             <ScrollLink 
               key={index} 
@@ -40,47 +46,55 @@ const Navbar = () => {
               smooth={true}
               offset={-70}
               duration={500}
-              className="text-black font-medium text-sm cursor-pointer no-underline"
+              className="text-black font-medium text-sm cursor-pointer no-underline hover:text-gray-600 transition-colors duration-200 ease-in-out whitespace-nowrap"
+              onClick={() => setIsDesktopMenuOpen(false)}
             >
               {item.name}
             </ScrollLink>
           ))}
         </div>
         
-        <div className="md:hidden">
-          <button 
-            className="text-black p-1"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
+        {/* Hamburger menu button for all screen sizes */}
+        <button 
+          className="text-black p-1"
+          onClick={() => {
+            // On mobile (when md:hidden applies), toggle mobile menu
+            // On desktop, toggle desktop menu
+            if (window.innerWidth < 768) {
+              toggleMenu();
+            } else {
+              toggleDesktopMenu();
+            }
+          }}
+          aria-label="Toggle menu"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor" 
+            className="w-6 h-6"
           >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor" 
-              className="w-6 h-6"
-            >
-              {isMenuOpen ? (
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M6 18L18 6M6 6l12 12" 
-                />
-              ) : (
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M4 6h16M4 12h16M4 18h16" 
-                />
-              )}
-            </svg>
-          </button>
-        </div>
+            {(isMenuOpen || isDesktopMenuOpen) ? (
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M6 18L18 6M6 6l12 12" 
+              />
+            ) : (
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M4 6h16M4 12h16M4 18h16" 
+              />
+            )}
+          </svg>
+        </button>
       </nav>
       
-      {/* Mobile menu */}
+      {/* Mobile menu - Side drawer */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden">
           <div className="fixed right-0 top-0 h-full w-64 bg-white shadow-lg p-4 transform transition-transform duration-300 ease-in-out">

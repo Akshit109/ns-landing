@@ -180,11 +180,11 @@ const PieSection = () => {
                 </div>
                 <a
                   href='www.google.com'
-                  className='inline-flex w-fit items-center gap-2 mt-4 md:mt-2 px-4 py-2 bg-ctaColor no-underline text-customLightGray hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
+                  className='inline-flex w-fit items-center gap-2 mt-4 md:mt-2 px-4 py-2 bg-ctaColor no-underline text-black hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Click me
+                  View
                 </a>
               </div>
             </div>
@@ -207,23 +207,23 @@ const PieSection = () => {
                 </p>
                 <a
                   href='https://support.zerodha.com/category/console/portfolio/console-holdings/articles/performance-curve'
-                  className='inline-flex w-fit items-center gap-2 mt-2 px-4 py-2 no-underline bg-ctaColor text-customLightGray hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
+                  className='inline-flex w-fit items-center gap-2 mt-2 px-4 py-2 no-underline bg-ctaColor text-black hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  click
+                  View
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-4 w-4'
                     fill='none'
                     viewBox='0 0 24 24'
-                    stroke='currentColor'
+                    stroke='black'
                   >
                     <path
                       strokeLinecap='round'
                       strokeLinejoin='round'
                       strokeWidth={2}
-                      d='M14 3h7m0 0v7m0-7L10 14m-7 7h7a2 2 0 002-2v-7'
+                      d='M5 19L19 5M19 5H9M19 5V15'
                     />
                   </svg>
                 </a>
