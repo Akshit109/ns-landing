@@ -80,6 +80,11 @@ const ThreeDimensionalAssetClassDarkMode = ({
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
+    
+    // Disable zoom for mobile to prevent interference with scrolling
+    if (isMobile) {
+      controls.enableZoom = false;
+    }
 
     // Lighting
     const ambientLightIntensity = 0.6; // Dark theme ambient
