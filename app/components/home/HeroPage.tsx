@@ -19,7 +19,7 @@ const HeroPage = () => {
   };
 
   return (
-    <div className='relative min-h-screen w-screen overflow-x-hidden'>
+    <div className='relative min-h-screen w-screen overflow-x-hidden font-rubik'>
       <div
         className='absolute inset-0 w-screen bg-cover bg-center bg-no-repeat'
         style={{ backgroundImage: 'url("/hero_bg.webp")' }}

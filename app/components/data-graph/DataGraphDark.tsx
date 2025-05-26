@@ -559,7 +559,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
         id='chartdivportfolio'
         style={{
           width: '100%',
-          height: '450px',
+          height: '500px',
           minWidth: '100%',
           minHeight: '350px',
           position: 'relative',

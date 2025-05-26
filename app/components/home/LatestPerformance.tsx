@@ -171,7 +171,7 @@ const PieSection = () => {
                 </h2>
                 <div className='text-left text-customLightGray text-lg md:text-2xl font-extralight leading-tight'>
                   <p>
-                    Our Objective:
+                    <span className="font-normal">Our Objective:</span>
                     <br />
                     Maximize risk adjusted returns
                     <br />

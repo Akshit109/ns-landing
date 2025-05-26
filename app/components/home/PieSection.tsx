@@ -16,7 +16,7 @@ const PieSection = () => {
         <h2 className="text-3xl sm:text-4xl md:text-6xl text-customLightGray font-normal mb-4 md:mb-6">
           Built for Modern Investors
         </h2>
-        <p className="text-base sm:text-lg font-light md:text-2xl text-customLightGray max-w-4xl mb-6 md:mb-8">
+        <p className="text-base sm:text-lg font-light md:text-2xl text-customLightGray max-w-5xl mb-6 md:mb-8">
           A new-age wealth-tech platform to enable a unified investing experience across a <br className='hidden md:block'/> multi-asset portfolio—powered by Zerodha.
         </p>
         {/* Animated Pie Chart Container (currently with image) */}

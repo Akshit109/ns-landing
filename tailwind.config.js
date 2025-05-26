@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'poppins': ['var(--font-poppins)', 'sans-serif'],
+        'rubik': ['var(--font-rubik)', 'sans-serif'],
+      },
       colors: {
         cardBgColor: "#1B1C1A",//custom black
         ctaColor:"#86E75D",//green

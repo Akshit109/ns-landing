@@ -9,7 +9,7 @@ import ScrollToTop from "./components/home/ScrollToTop";
 
 export default function Home() {
   return (
-    <main className="flex text-white min-h-screen bg-[#080808] font-sans space-y-8 md:space-y-16 lg:space-y-24 flex-col">
+    <main className="flex text-white min-h-screen bg-[#080808] font-poppins space-y-8 md:space-y-16 lg:space-y-24 flex-col">
       <HeroPage />
       <div className="px-4 md:p-4 lg:p-16 space-y-8 md:space-y-16 lg:space-y-24">
         <HomePage />
