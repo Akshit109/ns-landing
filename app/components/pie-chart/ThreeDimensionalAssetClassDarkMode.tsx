@@ -211,21 +211,23 @@ const ThreeDimensionalAssetClassDarkMode = ({
     legendContainer.style.display = 'flex';
     legendContainer.style.flexDirection = 'row';
     legendContainer.style.flexWrap = 'wrap';
-    legendContainer.style.justifyContent = 'center';
+    legendContainer.style.justifyContent = isMobile ? 'flex-start' : 'center';
     legendContainer.style.marginTop = '15px';
     legendContainer.style.backgroundColor = 'transparent';
-    legendContainer.style.padding = '5px';
+    legendContainer.style.padding = isMobile ? '10px 5px' : '5px';
     legendContainer.style.color = 'white';
     legendContainer.style.fontSize = isMobile ? '10px' : '12px';
+    legendContainer.style.gap = isMobile ? '8px' : '10px';
     containerRef.current.appendChild(legendContainer);
 
     sortedData.forEach((segment, index) => {
       const item = document.createElement('div');
       item.style.display = 'flex';
       item.style.alignItems = 'center';
-      item.style.marginRight = '10px'; // Add some spacing between items
-      item.style.marginBottom = '5px'; // Spacing between rows
-      item.style.minWidth = isMobile ? '100px' : '120px'; // Minimum width for legend items
+      item.style.marginRight = isMobile ? '0' : '10px'; // Remove right margin on mobile
+      item.style.marginBottom = isMobile ? '8px' : '5px'; // More spacing between rows on mobile
+      item.style.minWidth = isMobile ? 'calc(50% - 4px)' : '120px'; // Two columns on mobile
+      item.style.flex = isMobile ? '0 0 calc(50% - 4px)' : 'none'; // Flex basis for mobile
 
       const colorBox = document.createElement('div');
       colorBox.style.width = isMobile ? '8px' : '12px'; // Smaller box on mobile
@@ -250,9 +252,10 @@ const ThreeDimensionalAssetClassDarkMode = ({
     const fnoItem = document.createElement('div');
     fnoItem.style.display = 'flex';
     fnoItem.style.alignItems = 'center';
-    fnoItem.style.marginRight = '10px'; // Add some spacing between items
-    fnoItem.style.marginBottom = '5px'; // Spacing between rows
-    fnoItem.style.minWidth = isMobile ? '100px' : '120px'; // Minimum width for legend items
+    fnoItem.style.marginRight = isMobile ? '0' : '10px'; // Remove right margin on mobile
+    fnoItem.style.marginBottom = isMobile ? '8px' : '5px'; // More spacing between rows on mobile
+    fnoItem.style.minWidth = isMobile ? 'calc(50% - 4px)' : '120px'; // Two columns on mobile
+    fnoItem.style.flex = isMobile ? '0 0 calc(50% - 4px)' : 'none'; // Flex basis for mobile
 
     const fnoColorBox = document.createElement('div');
     fnoColorBox.style.width = isMobile ? '8px' : '12px'; // Smaller box on mobile

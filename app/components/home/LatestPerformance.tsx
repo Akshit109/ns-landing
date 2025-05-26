@@ -199,7 +199,7 @@ const PieSection = () => {
 
               {/* Description Section */}
               <div className='md:w-1/3 md:flex md:flex-col md:justify-start order-1 md:order-1 text-left'>
-                <h2 className='text-3xl md:text-4xl text-customLightGray font-medium mt-6 md:mt-12 mb-4 md:mb-6'>
+                <h2 className='text-3xl md:text-4xl text-customLightGray font-medium mt-12  mb-4 md:mb-6'>
                   Portfolio Performance
                 </h2>
                 <p className='text-customLightGray text-lg md:text-2xl font-extralight leading-tight mb-2'>
