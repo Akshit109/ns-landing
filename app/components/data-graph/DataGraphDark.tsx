@@ -80,7 +80,7 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
 
   // Helper function to get responsive height
   const getResponsiveHeight = (width: number): string => {
-    if (width < 640) return '450px';
+    if (width < 640) return '400px'; // Reduced height for mobile
     if (width < 1024) return '550px';
     return '650px';
   };
@@ -245,8 +245,10 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
           wheelY: 'zoomX',
           pinchZoomX: true,
           maxTooltipDistance: 0,
-          paddingLeft: 0, // Ensure no extra padding
-          paddingRight: 0, // Ensure no extra padding
+          paddingLeft: windowWidth < 640 ? 5 : 0, // Reduced padding for mobile
+          paddingRight: windowWidth < 640 ? 5 : 0,
+          paddingTop: windowWidth < 640 ? 5 : 0,
+          paddingBottom: windowWidth < 640 ? 5 : 0,
           width: am5.percent(100),
           height: am5.percent(100),
         })
@@ -381,7 +383,8 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
           centerX: am5.percent(50),
           x: am5.percent(50),
           layout: root.horizontalLayout,
-          marginTop: 15,
+          marginTop: windowWidth < 640 ? 8 : 15, // Reduced margin for mobile
+          marginBottom: windowWidth < 640 ? 5 : 0,
           useDefaultMarker: true,
         })
       );
@@ -389,13 +392,13 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
       // Style legend text
       legend.labels.template.setAll({
         fill: textColor,
-        fontSize: windowWidth < 640 ? 10 : 12, // Smaller font on mobile
+        fontSize: windowWidth < 640 ? 8 : 12, // Even smaller font on mobile
       });
 
       // Customize legend markers
       legend.markers.template.setAll({
-        width: windowWidth < 640 ? 10 : 15,
-        height: windowWidth < 640 ? 10 : 15,
+        width: windowWidth < 640 ? 8 : 15, // Smaller markers on mobile
+        height: windowWidth < 640 ? 8 : 15,
       });
 
       legend.data.setAll(chart.series.values);
@@ -418,7 +421,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
       // Make date axis labels responsive
       dateAxis.get('renderer').labels.template.setAll({
         fill: textColor,
-        fontSize: windowWidth < 640 ? 10 : 12,
+        fontSize: windowWidth < 640 ? 8 : 12, // Smaller font for mobile
         rotation: windowWidth < 640 ? -45 : 0,
         centerY: windowWidth < 640 ? am5.p50 : am5.p0,
         centerX: windowWidth < 640 ? am5.p100 : am5.p50,
@@ -427,7 +430,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
       // Make value axis labels responsive
       valueAxis.get('renderer').labels.template.setAll({
         fill: textColor,
-        fontSize: windowWidth < 640 ? 10 : 12,
+        fontSize: windowWidth < 640 ? 8 : 12, // Smaller font for mobile
       });
 
       // Animation and zoom
@@ -492,25 +495,25 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
 
           // Update legend text sizes
           legend.labels.template.setAll({
-            fontSize: isMobile ? 10 : 12,
+            fontSize: isMobile ? 8 : 12, // Smaller font for mobile
           });
 
           // Update legend marker sizes
           legend.markers.template.setAll({
-            width: isMobile ? 10 : 15,
-            height: isMobile ? 10 : 15,
+            width: isMobile ? 8 : 15, // Smaller markers for mobile
+            height: isMobile ? 8 : 15,
           });
 
           // Update axis label sizes and rotation
           dateAxis.get('renderer').labels.template.setAll({
-            fontSize: isMobile ? 10 : 12,
+            fontSize: isMobile ? 8 : 12, // Smaller font for mobile
             rotation: isMobile ? -45 : 0,
             centerY: isMobile ? am5.p50 : am5.p0,
             centerX: isMobile ? am5.p100 : am5.p50,
           });
 
           valueAxis.get('renderer').labels.template.setAll({
-            fontSize: isMobile ? 10 : 12,
+            fontSize: isMobile ? 8 : 12, // Smaller font for mobile
           });
 
           // Update tooltips
@@ -569,7 +572,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
   };
 
   return (
-    <div className='p-2 sm:p-4 dark:bg-black dark:text-white'>
+    <div className='p-1 sm:p-4 dark:bg-black dark:text-white'>
       {/* <h2 className="text-center  text-xl dark:text-white">
         Portfolio Performance
       </h2> */}
@@ -592,23 +595,25 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
         </ButtonGroup>
       </div>
       {/* Assign the ref to the chart container div */}
-      <div
-        ref={chartContainerRef}
-        id='chartdivportfolio'
-        style={{
-          width: '100%',
-          height: getResponsiveHeight(windowWidth),
-          minWidth: '100%',
-          minHeight: getResponsiveHeight(windowWidth),
-          position: 'relative',
-        }}
-        className='w-full'
-      >
-        {!isChartReady && (
-          <div className='absolute inset-0 flex items-center justify-center'>
-            <div className='text-lg'>Loading chart...</div>
-          </div>
-        )}
+      <div className={windowWidth < 640 ? 'overflow-x-auto' : ''}>
+        <div
+          ref={chartContainerRef}
+          id='chartdivportfolio'
+          style={{
+            width: '100%',
+            height: getResponsiveHeight(windowWidth),
+            minWidth: windowWidth < 640 ? '500px' : '100%', // Minimum width for mobile horizontal scroll
+            minHeight: getResponsiveHeight(windowWidth),
+            position: 'relative',
+          }}
+          className='w-full'
+        >
+          {!isChartReady && (
+            <div className='absolute inset-0 flex items-center justify-center'>
+              <div className='text-lg'>Loading chart...</div>
+            </div>
+          )}
+        </div>
       </div>
       <div className='text-right mt-1 sm:mt-2'>
         {data ? (

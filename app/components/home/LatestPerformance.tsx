@@ -193,7 +193,7 @@ const PieSection = () => {
           <div className='col-span-12 h-screen flex items-center justify-center'>
             <div className='flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0 w-full'>
               {/* Chart Section */}
-              <div className='md:w-2/3 order-2 md:order-2'>
+              <div className='md:w-2/3 order-2 md:order-2 mt-6 md:mt-0'>
                 <DataGraphPage />
               </div>
 
