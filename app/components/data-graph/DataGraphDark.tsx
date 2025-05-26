@@ -536,7 +536,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
         Portfolio Performance
       </h2> */}
       <div className='mb-2 sm:mb-4'>
-        <ButtonGroup className='mr-4 flex flex-wrap gap-1 sm:flex-nowrap'>
+        <ButtonGroup className='mr-4 flex flex-wrap gap-1 sm:flex-nowrap w-full'>
           {['Lifetime', '3M', '6M', '1Y'].map((value) => (
             <ToggleButton
               key={value}
@@ -546,7 +546,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
               value={value}
               checked={range === value}
               onChange={handleRangeChange}
-              className='text-sm sm:text-base'
+              className='text-sm sm:text-base flex-1'
             >
               {value}
             </ToggleButton>
@@ -559,7 +559,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
         id='chartdivportfolio'
         style={{
           width: '100%',
-          height: '350px',
+          height: '450px',
           minWidth: '100%',
           minHeight: '350px',
           position: 'relative',

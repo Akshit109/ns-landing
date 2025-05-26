@@ -9,8 +9,8 @@ const PieSection = () => {
       <div className='flex flex-col items-center justify-center text-center px-4'>
         <div className='grid grid-cols-12 gap-6 md:gap-12 lg:gap-24 w-full max-w-[1400px]'>
           {/* performance screenshot section */}
-          <div className='col-span-12'>
-            <div className='flex flex-col md:flex-row md:justify-between space-y-6 md:space-y-0'>
+          <div className='col-span-12 h-screen flex items-center justify-center'>
+            <div className='flex flex-col md:flex-row md:justify-between space-y-6 md:space-y-0 w-full'>
               {/* Chart Section */}
               <div className='md:w-1/2 border-b pb-4'>
                 {/* Responsive table with card view for mobile */}
@@ -184,14 +184,14 @@ const PieSection = () => {
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  View
+                  Download Deck
                 </a>
               </div>
             </div>
           </div>
           {/* Graph screenshot section */}
-          <div className='col-span-12'>
-            <div className='flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0'>
+          <div className='col-span-12 h-screen flex items-center justify-center'>
+            <div className='flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0 w-full'>
               {/* Chart Section */}
               <div className='md:w-2/3 order-2 md:order-2'>
                 <DataGraphPage />

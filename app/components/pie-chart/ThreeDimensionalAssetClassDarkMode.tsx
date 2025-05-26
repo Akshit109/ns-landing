@@ -59,7 +59,7 @@ const ThreeDimensionalAssetClassDarkMode = ({
 
     // Setup Three.js scene
     const width = isMobile ? Math.min(320, window.innerWidth - 40) : 900;
-    const canvasHeight = isMobile ? 250 : 500;
+    const canvasHeight = isMobile ? 400 : 700;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x080808); // Changed to very dark black #080808
 

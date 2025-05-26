@@ -19,8 +19,8 @@ const Navbar = () => {
   const navItems = [
     { name: "Home", target: "pie-section" },
     { name: "Performance", target: "latest-performance" },
-    { name: "Why NS", target: "why-ns" },
-    { name: "Partner with NS", target: "partner-with-ns" }
+    { name: "Why us", target: "why-ns" },
+    { name: "Partner with us", target: "partner-with-ns" }
   ];
 
   return (
@@ -32,7 +32,7 @@ const Navbar = () => {
             alt="Logo" 
             width={32} 
             height={32} 
-            className="mr-2 sm:mr-4 sm:w-10 sm:h-10 md:w-[40px] md:h-[40px]"
+            className="mr-2 sm:mr-4 sm:w-10 sm:h-10 md:w-[40px] md:h-[36px] object-center"
           />
         </div>
         

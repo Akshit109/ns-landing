@@ -17,7 +17,7 @@ const PieSection = () => {
           Built for Modern Investors
         </h2>
         <p className="text-base sm:text-lg font-light md:text-2xl text-customLightGray max-w-4xl mb-6 md:mb-8">
-          A new-age Wealth Tech Platform to enable a Unified Investing Experience across a <br className='hidden md:block'/> multi-asset portfolio—powered by Zerodha.
+          A new-age wealth-tech platform to enable a unified investing experience across a <br className='hidden md:block'/> multi-asset portfolio—powered by Zerodha.
         </p>
         {/* Animated Pie Chart Container (currently with image) */}
         <div className="w-full max-w-full overflow-x-auto md:overflow-visible">
