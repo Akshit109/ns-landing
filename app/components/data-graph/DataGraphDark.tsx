@@ -76,15 +76,37 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
   > | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isChartReady, setIsChartReady] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(1024); // Default to desktop size
+
+  // Helper function to get responsive height
+  const getResponsiveHeight = (width: number): string => {
+    if (width < 640) return '450px';
+    if (width < 1024) return '550px';
+    return '650px';
+  };
 
   // This effect runs once on mount to delay the chart readiness signal
   useEffect(() => {
+    // Set initial window width and add resize listener
+    const updateWindowWidth = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    // Set initial width
+    updateWindowWidth();
+
+    // Add resize listener
+    window.addEventListener('resize', updateWindowWidth);
+
     // Delay chart initialization to ensure DOM is fully ready
     const timer = setTimeout(() => {
       setIsChartReady(true);
     }, 300); // 300ms delay
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateWindowWidth);
+    };
   }, []); // Empty dependency array - runs only once on mount
 
   useEffect(() => {
@@ -225,6 +247,8 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
           maxTooltipDistance: 0,
           paddingLeft: 0, // Ensure no extra padding
           paddingRight: 0, // Ensure no extra padding
+          width: am5.percent(100),
+          height: am5.percent(100),
         })
       );
 
@@ -365,20 +389,20 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
       // Style legend text
       legend.labels.template.setAll({
         fill: textColor,
-        fontSize: window.innerWidth < 640 ? 10 : 12, // Smaller font on mobile
+        fontSize: windowWidth < 640 ? 10 : 12, // Smaller font on mobile
       });
 
       // Customize legend markers
       legend.markers.template.setAll({
-        width: window.innerWidth < 640 ? 10 : 15,
-        height: window.innerWidth < 640 ? 10 : 15,
+        width: windowWidth < 640 ? 10 : 15,
+        height: windowWidth < 640 ? 10 : 15,
       });
 
       legend.data.setAll(chart.series.values);
 
       // Common tooltip content - simplified for mobile
       const getTooltipText = (series: string) => {
-        return window.innerWidth < 640
+        return windowWidth < 640
           ? `[bold]{name}[/]: [bold]{valueY.formatNumber('#,###.##')}[/]`
           : `[bold]{name}[/]
 Date: [bold]{valueX.formatDate('yyyy-MM-dd')}[/]
@@ -394,21 +418,28 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
       // Make date axis labels responsive
       dateAxis.get('renderer').labels.template.setAll({
         fill: textColor,
-        fontSize: window.innerWidth < 640 ? 10 : 12,
-        rotation: window.innerWidth < 640 ? -45 : 0,
-        centerY: window.innerWidth < 640 ? am5.p50 : am5.p0,
-        centerX: window.innerWidth < 640 ? am5.p100 : am5.p50,
+        fontSize: windowWidth < 640 ? 10 : 12,
+        rotation: windowWidth < 640 ? -45 : 0,
+        centerY: windowWidth < 640 ? am5.p50 : am5.p0,
+        centerX: windowWidth < 640 ? am5.p100 : am5.p50,
       });
 
       // Make value axis labels responsive
       valueAxis.get('renderer').labels.template.setAll({
         fill: textColor,
-        fontSize: window.innerWidth < 640 ? 10 : 12,
+        fontSize: windowWidth < 640 ? 10 : 12,
       });
 
       // Animation and zoom
       chart.appear(1000, 100);
       dateAxis.zoom(0, 1);
+
+      // Force immediate height setting
+      if (chartContainerRef.current) {
+        const responsiveHeight = getResponsiveHeight(windowWidth);
+        chartContainerRef.current.style.height = responsiveHeight;
+        chartContainerRef.current.style.minHeight = responsiveHeight;
+      }
 
       // Multiple resize attempts with different delays
       const timeoutIds: number[] = [];
@@ -449,8 +480,15 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
           // Update chart size
           chartRef.current.resize();
 
+          // Update container height based on screen size
+          if (chartContainerRef.current) {
+            const responsiveHeight = getResponsiveHeight(windowWidth);
+            chartContainerRef.current.style.height = responsiveHeight;
+            chartContainerRef.current.style.minHeight = responsiveHeight;
+          }
+
           // Update text sizes based on screen width
-          const isMobile = window.innerWidth < 640;
+          const isMobile = windowWidth < 640;
 
           // Update legend text sizes
           legend.labels.template.setAll({
@@ -524,7 +562,7 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
         chartRef.current = null;
       }
     }
-  }, [filteredData, isDarkMode, isChartReady]);
+  }, [filteredData, isDarkMode, isChartReady, windowWidth]);
 
   const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRange(event.target.value);
@@ -559,12 +597,12 @@ Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
         id='chartdivportfolio'
         style={{
           width: '100%',
-          height: '500px',
+          height: getResponsiveHeight(windowWidth),
           minWidth: '100%',
-          minHeight: '350px',
+          minHeight: getResponsiveHeight(windowWidth),
           position: 'relative',
         }}
-        className='sm:h-[450px] md:h-[550px] sm:min-h-[450px] md:min-h-[550px]'
+        className='w-full'
       >
         {!isChartReady && (
           <div className='absolute inset-0 flex items-center justify-center'>
