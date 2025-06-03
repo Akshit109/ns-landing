@@ -154,7 +154,7 @@ const PieSection = () => {
 
                     <div className='flex flex-col md:flex-row md:justify-between text-xs text-white mt-2 px-2'>
                       <span className='text-customLightGray'>
-                        *Launched in August 2023 (~ 21 months)
+                        *Launched in August 2023 (~ 22 months)
                       </span>
                       <span className='text-customLightGray'>
                         As of 11-May-25
