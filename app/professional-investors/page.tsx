@@ -25,11 +25,7 @@ const ProfessionalInvestorsPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Console log the data for verification
-    console.log('Form Data Submitted:', formData);
-
     try {
-      // For Netlify forms, we need to submit with the proper format
       const response = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -40,9 +36,7 @@ const ProfessionalInvestorsPage = () => {
       });
 
       if (response.ok) {
-        console.log('Form submitted successfully!');
         alert('Thank you! Your inquiry has been submitted successfully.');
-        // Reset form
         setFormData({
           name: '',
           email: '',
@@ -51,11 +45,9 @@ const ProfessionalInvestorsPage = () => {
           'investor-type': 'Professional-investor'
         });
       } else {
-        console.error('Form submission failed');
         alert('There was an error submitting your form. Please try again.');
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
       alert('There was an error submitting your form. Please try again.');
     } finally {
       setIsSubmitting(false);
