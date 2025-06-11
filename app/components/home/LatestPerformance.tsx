@@ -179,8 +179,9 @@ const PieSection = () => {
                   </p>
                 </div>
                 <a
-                  href='www.google.com'
+                  href='/Nifty.Shloka..pdf'
                   className='inline-flex w-fit items-center gap-2 mt-4 md:mt-2 px-4 py-2 bg-ctaColor no-underline text-black hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
+                  download
                   target='_blank'
                   rel='noopener noreferrer'
                 >
