@@ -1,58 +1,6 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 
 const ProfessionalInvestorsPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    'investor-type': 'Professional-investor'
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'professional-investor',
-          ...formData
-        }).toString()
-      });
-
-      if (response.ok) {
-        alert('Thank you! Your inquiry has been submitted successfully.');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          message: '',
-          'investor-type': 'Professional-investor'
-        });
-      } else {
-        alert('There was an error submitting your form. Please try again.');
-      }
-    } catch (error) {
-      alert('There was an error submitting your form. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -66,24 +14,8 @@ const ProfessionalInvestorsPage = () => {
           </p>
         </div>
 
-        {/* Hidden form for Netlify */}
-        <form name="professional-investor" data-netlify="true" hidden>
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <input type="tel" name="phone" />
-          <textarea name="message"></textarea>
-          <input type="hidden" name="investor-type" />
-        </form>
-
-        {/* Actual form */}
-        <form 
-          name="professional-investor" 
-          method="POST" 
-          data-netlify="true" 
-          data-netlify-honeypot="bot-field"
-          onSubmit={handleSubmit} 
-          className="space-y-6"
-        >
+        {/* Netlify Form */}
+        <form name="contact" netlify>
           {/* Honeypot field for spam protection */}
           <div style={{ display: 'none' }}>
             <label>
@@ -95,7 +27,7 @@ const ProfessionalInvestorsPage = () => {
           <input 
             type="hidden" 
             name="investor-type" 
-            value={formData['investor-type']} 
+            value="Professional-investor" 
           />
           
           <div>
@@ -106,8 +38,6 @@ const ProfessionalInvestorsPage = () => {
               type="text"
               id="name"
               name="name"
-              value={formData.name}
-              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your full name"
@@ -122,8 +52,6 @@ const ProfessionalInvestorsPage = () => {
               type="email"
               id="email"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your email address"
@@ -138,8 +66,6 @@ const ProfessionalInvestorsPage = () => {
               type="tel"
               id="phone"
               name="phone"
-              value={formData.phone}
-              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your phone number"
@@ -153,8 +79,6 @@ const ProfessionalInvestorsPage = () => {
             <textarea
               id="message"
               name="message"
-              value={formData.message}
-              onChange={handleChange}
               required
               rows={4}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -164,10 +88,10 @@ const ProfessionalInvestorsPage = () => {
 
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200"
+            name="submit"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
           >
-            {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
+            Submit Inquiry
           </button>
         </form>
 
