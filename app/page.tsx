@@ -17,7 +17,7 @@ export default function Home() {
         <LatestPerformance />
         <WhyNs />
         <PartnerWithNs />
-        <Disclaimer />
+        <Disclaimer />       
       </div>
       <ScrollToTop />
     </main>
