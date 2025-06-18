@@ -72,7 +72,7 @@ const ProfessionalInvestorsPage = () => {
         )}
 
         {/* Netlify Form */}
-        <form name="contact" netlify onSubmit={handleSubmit}>
+        <form name="contact" data-netlify="true" onSubmit={handleSubmit}>
           {/* Honeypot field for spam protection */}
           <div style={{ display: 'none' }}>
             <label>
