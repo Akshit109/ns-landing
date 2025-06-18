@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 
-const ProfessionalInvestorsPage = () => {
+const NewToInvestingPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
@@ -40,10 +40,10 @@ const ProfessionalInvestorsPage = () => {
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            Professional Investors
+            New to Investing
           </h1>
           <p className="text-gray-600">
-            Get in touch with us to discuss investment opportunities
+            Start your investment journey with us. Get guidance and support for beginners.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ const ProfessionalInvestorsPage = () => {
                   </svg>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Submitted Successfully!</h3>
-                <p className="text-gray-600 mb-4">Thank you for your inquiry. We'll get back to you soon.</p>
+                <p className="text-gray-600 mb-4">Thank you for your inquiry. We'll help you start your investment journey!</p>
                 <button
                   onClick={() => setShowSuccessPopup(false)}
                   className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
@@ -84,7 +84,7 @@ const ProfessionalInvestorsPage = () => {
           <input 
             type="hidden" 
             name="investor-type" 
-            value="Professional-investor" 
+            value="new-to-investing" 
           />
           
           <div className="mb-6">
@@ -143,7 +143,7 @@ const ProfessionalInvestorsPage = () => {
               rows={4}
               disabled={isSubmitting}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
-              placeholder="Tell us about your investment interests or any questions you have..."
+              placeholder="Tell us about your investment goals or any questions you have as a beginner..."
             />
           </div>
 
@@ -162,7 +162,7 @@ const ProfessionalInvestorsPage = () => {
                 Submitting...
               </>
             ) : (
-              'Submit Inquiry'
+              'Get Started'
             )}
           </button>
         </form>
@@ -177,4 +177,4 @@ const ProfessionalInvestorsPage = () => {
   );
 };
 
-export default ProfessionalInvestorsPage; 
+export default NewToInvestingPage;
