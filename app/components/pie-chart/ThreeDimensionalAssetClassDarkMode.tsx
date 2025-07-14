@@ -50,9 +50,16 @@ const ThreeDimensionalAssetClassDarkMode = ({
       containerRef.current.removeChild(containerRef.current.firstChild);
     }
 
+    // Create a container for the chart
+    const chartContainer = document.createElement('div');
+    chartContainer.style.width = '100%';
+    chartContainer.style.display = 'flex';
+    chartContainer.style.justifyContent = 'center';
+    containerRef.current.appendChild(chartContainer);
+
     // Setup Three.js scene
     const width = isMobile ? Math.min(320, window.innerWidth - 40) : 900;
-    const canvasHeight = isMobile ? 250 : 500;
+    const canvasHeight = isMobile ? 400 : 700;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x080808); // Changed to very dark black #080808
 
@@ -67,12 +74,15 @@ const ThreeDimensionalAssetClassDarkMode = ({
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, canvasHeight);
-    containerRef.current.appendChild(renderer.domElement);
+    chartContainer.appendChild(renderer.domElement);
 
     // Add controls for testing (can be removed in production)
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.1;
+    
+    // Disable zoom for all screen sizes
+    controls.enableZoom = false;
 
     // Lighting
     const ambientLightIntensity = 0.6; // Dark theme ambient
@@ -195,29 +205,27 @@ const ThreeDimensionalAssetClassDarkMode = ({
 
     // Add legend (using DOM elements)
     const legendContainer = document.createElement('div');
-    legendContainer.style.position = 'absolute';
-    // Position bottom-center
-    legendContainer.style.bottom = '10px';
-    legendContainer.style.left = '50%';
-    legendContainer.style.transform = 'translateX(-50%)';
+    legendContainer.style.width = '100%';
     legendContainer.style.display = 'flex';
-    legendContainer.style.flexDirection = 'row'; // Change to row layout
-    legendContainer.style.flexWrap = 'wrap'; // Allow wrapping if needed
-    legendContainer.style.justifyContent = 'center'; // Center items horizontally
+    legendContainer.style.flexDirection = 'row';
+    legendContainer.style.flexWrap = 'wrap';
+    legendContainer.style.justifyContent = isMobile ? 'flex-start' : 'center';
+    legendContainer.style.marginTop = '15px';
     legendContainer.style.backgroundColor = 'transparent';
-    legendContainer.style.padding = '5px 10px'; // Adjust padding
-    legendContainer.style.borderRadius = '8px';
-    legendContainer.style.color = 'white'; // Dark theme legend color
-    legendContainer.style.fontSize = isMobile ? '10px' : '12px'; // Smaller on mobile
-    legendContainer.style.pointerEvents = 'none'; // Prevent legend from blocking controls
+    legendContainer.style.padding = isMobile ? '10px 5px' : '5px';
+    legendContainer.style.color = 'white';
+    legendContainer.style.fontSize = isMobile ? '10px' : '12px';
+    legendContainer.style.gap = isMobile ? '8px' : '10px';
     containerRef.current.appendChild(legendContainer);
 
     sortedData.forEach((segment, index) => {
       const item = document.createElement('div');
       item.style.display = 'flex';
       item.style.alignItems = 'center';
-      item.style.marginRight = isMobile ? '8px' : '15px'; // Spacing for row layout, smaller on mobile
-      item.style.marginBottom = '5px'; // Spacing if wrapping occurs
+      item.style.marginRight = isMobile ? '0' : '10px'; // Remove right margin on mobile
+      item.style.marginBottom = isMobile ? '8px' : '5px'; // More spacing between rows on mobile
+      item.style.minWidth = isMobile ? 'calc(50% - 4px)' : '120px'; // Two columns on mobile
+      item.style.flex = isMobile ? '0 0 calc(50% - 4px)' : 'none'; // Flex basis for mobile
 
       const colorBox = document.createElement('div');
       colorBox.style.width = isMobile ? '8px' : '12px'; // Smaller box on mobile
@@ -242,8 +250,10 @@ const ThreeDimensionalAssetClassDarkMode = ({
     const fnoItem = document.createElement('div');
     fnoItem.style.display = 'flex';
     fnoItem.style.alignItems = 'center';
-    fnoItem.style.marginRight = isMobile ? '8px' : '15px'; // Spacing for row layout, smaller on mobile
-    fnoItem.style.marginBottom = '5px'; // Spacing if wrapping occurs
+    fnoItem.style.marginRight = isMobile ? '0' : '10px'; // Remove right margin on mobile
+    fnoItem.style.marginBottom = isMobile ? '8px' : '5px'; // More spacing between rows on mobile
+    fnoItem.style.minWidth = isMobile ? 'calc(50% - 4px)' : '120px'; // Two columns on mobile
+    fnoItem.style.flex = isMobile ? '0 0 calc(50% - 4px)' : 'none'; // Flex basis for mobile
 
     const fnoColorBox = document.createElement('div');
     fnoColorBox.style.width = isMobile ? '8px' : '12px'; // Smaller box on mobile
@@ -263,17 +273,14 @@ const ThreeDimensionalAssetClassDarkMode = ({
     return () => {
       cancelAnimationFrame(animationFrameId);
       if (containerRef.current) {
-        if (renderer.domElement) {
-          containerRef.current.removeChild(renderer.domElement);
-        }
-        if (legendContainer && legendContainer.parentNode === containerRef.current) {
-          containerRef.current.removeChild(legendContainer);
+        while (containerRef.current.firstChild) {
+          containerRef.current.removeChild(containerRef.current.firstChild);
         }
       }
     };
   }, [pieChartData, isMobile]); // Re-render when isMobile changes
 
-  return <div ref={containerRef} className="w-full flex justify-center"></div>;
+  return <div ref={containerRef} className="w-full"></div>;
 };
 
 export default ThreeDimensionalAssetClassDarkMode;

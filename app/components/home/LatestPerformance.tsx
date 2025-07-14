@@ -9,8 +9,8 @@ const PieSection = () => {
       <div className='flex flex-col items-center justify-center text-center px-4'>
         <div className='grid grid-cols-12 gap-6 md:gap-12 lg:gap-24 w-full max-w-[1400px]'>
           {/* performance screenshot section */}
-          <div className='col-span-12'>
-            <div className='flex flex-col md:flex-row md:justify-between space-y-6 md:space-y-0'>
+          <div className='col-span-12 h-screen flex items-center justify-center'>
+            <div className='flex flex-col md:flex-row md:justify-between space-y-6 md:space-y-0 w-full'>
               {/* Chart Section */}
               <div className='md:w-1/2 border-b pb-4'>
                 {/* Responsive table with card view for mobile */}
@@ -154,7 +154,7 @@ const PieSection = () => {
 
                     <div className='flex flex-col md:flex-row md:justify-between text-xs text-white mt-2 px-2'>
                       <span className='text-customLightGray'>
-                        *Launched in August 2023 (~ 21 months)
+                        *Launched in August 2023 (~ 22 months)
                       </span>
                       <span className='text-customLightGray'>
                         As of 11-May-25
@@ -171,7 +171,7 @@ const PieSection = () => {
                 </h2>
                 <div className='text-left text-customLightGray text-lg md:text-2xl font-extralight leading-tight'>
                   <p>
-                    Our Objective:
+                    <span className="font-normal">Our Objective:</span>
                     <br />
                     Maximize risk adjusted returns
                     <br />
@@ -179,27 +179,28 @@ const PieSection = () => {
                   </p>
                 </div>
                 <a
-                  href='www.google.com'
-                  className='inline-flex w-fit items-center gap-2 mt-4 md:mt-2 px-4 py-2 bg-ctaColor no-underline text-customLightGray hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
+                  href='/Nifty.Shloka..pdf'
+                  className='inline-flex w-fit items-center gap-2 mt-4 md:mt-2 px-4 py-2 bg-ctaColor no-underline text-black hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
+                  download
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Click me
+                  Download Deck
                 </a>
               </div>
             </div>
           </div>
           {/* Graph screenshot section */}
-          <div className='col-span-12'>
-            <div className='flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0'>
+          <div className='col-span-12 h-screen flex items-center justify-center'>
+            <div className='flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0 w-full'>
               {/* Chart Section */}
-              <div className='md:w-2/3 order-2 md:order-2'>
+              <div className='md:w-2/3 order-2 md:order-2 mt-6 md:mt-0'>
                 <DataGraphPage />
               </div>
 
               {/* Description Section */}
               <div className='md:w-1/3 md:flex md:flex-col md:justify-start order-1 md:order-1 text-left'>
-                <h2 className='text-3xl md:text-4xl text-customLightGray font-medium mt-6 md:mt-12 mb-4 md:mb-6'>
+                <h2 className='text-3xl md:text-4xl text-customLightGray font-medium mt-12  mb-4 md:mb-6'>
                   Portfolio Performance
                 </h2>
                 <p className='text-customLightGray text-lg md:text-2xl font-extralight leading-tight mb-2'>
@@ -207,23 +208,23 @@ const PieSection = () => {
                 </p>
                 <a
                   href='https://support.zerodha.com/category/console/portfolio/console-holdings/articles/performance-curve'
-                  className='inline-flex w-fit items-center gap-2 mt-2 px-4 py-2 no-underline bg-ctaColor text-customLightGray hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
+                  className='inline-flex w-fit items-center gap-2 mt-2 px-4 py-2 no-underline bg-ctaColor text-black hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  click
+                  View
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     className='h-4 w-4'
                     fill='none'
                     viewBox='0 0 24 24'
-                    stroke='currentColor'
+                    stroke='black'
                   >
                     <path
                       strokeLinecap='round'
                       strokeLinejoin='round'
                       strokeWidth={2}
-                      d='M14 3h7m0 0v7m0-7L10 14m-7 7h7a2 2 0 002-2v-7'
+                      d='M5 19L19 5M19 5H9M19 5V15'
                     />
                   </svg>
                 </a>
