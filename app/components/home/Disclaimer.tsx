@@ -27,7 +27,8 @@ const Disclaimer = () => {
           <p className="text-white italic font-light mr-1 text-sm" style={{lineHeight: 1}}>Powered by</p>
           <a href="https://ikensolutions.com/" target="_blank" rel="noopener noreferrer">
             <Image
-              src="https://niftyshloka.com/iken-logo-white.png"
+              // src="https://niftyshloka.com/iken-logo-white.png"
+              src='/logo_fixed.svg'
               alt="Iken Solutions Logo"
               width={110}
               height={68}

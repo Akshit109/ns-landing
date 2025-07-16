@@ -2,9 +2,10 @@
 
 import React from 'react';
 import DataGraphDark from './DataGraphDark';
-import jsonData from './portfolio_perfomance_may9.json'; // Assuming the JSON file is in the same directory
+import portfolioData from './portfolio_perfomance.json'; // Portfolio performance data
+import niftyData from './nifty50.json'; // Nifty50 data
 
-// Helper function to find the latest date from the JSON data
+// Helper function to find the latest date from the portfolio data
 const getLatestDate = (data: Record<string, any>): string | undefined => {
   const dates = Object.keys(data);
   if (dates.length === 0) {
@@ -15,18 +16,22 @@ const getLatestDate = (data: Record<string, any>): string | undefined => {
 };
 
 const DataGraphPage = () => {
-  const latestDate = getLatestDate(jsonData);
+  const latestDate = getLatestDate(portfolioData);
 
-  // Ensure jsonData and latestDate are available before rendering
-  if (!jsonData || typeof latestDate === 'undefined') {
+  // Ensure both data sources and latestDate are available before rendering
+  if (!portfolioData || !niftyData || typeof latestDate === 'undefined') {
     // Optionally, render a loading state or an error message
     return <div>Loading data or data unavailable...</div>;
   }
 
   return (
     <div>
-      {/* Pass the entire jsonData object as the data prop and the determined latestDate */}
-      <DataGraphDark data={jsonData} latestDate={latestDate} />
+      {/* Pass both data sources separately to DataGraphDark */}
+      <DataGraphDark 
+        portfolioData={portfolioData} 
+        niftyData={niftyData} 
+        latestDate={latestDate} 
+      />
     </div>
   );
 };

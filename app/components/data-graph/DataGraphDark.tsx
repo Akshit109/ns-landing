@@ -4,12 +4,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as am5 from '@amcharts/amcharts5';
 import * as am5xy from '@amcharts/amcharts5/xy';
 import am5themesAnimated from '@amcharts/amcharts5/themes/Animated';
-import { ButtonGroup, ToggleButton } from 'react-bootstrap';
+import { ButtonGroup, ToggleButton, Button } from 'react-bootstrap';
 import { filterData } from '../../helper';
 
-// Helper function moved outside component scope
 const isDateOlderThanSevenDays = (dateString: string | null): boolean => {
-  if (!dateString) return false; // Handle null/undefined case
+  if (!dateString) return true;
   const lastUpdatedDate = new Date(dateString);
   const currentDate = new Date();
   const differenceInDays =
@@ -17,28 +16,21 @@ const isDateOlderThanSevenDays = (dateString: string | null): boolean => {
   return differenceInDays > 7;
 };
 
-// Helper component moved outside the main component
 const LastUpdatedStatusDisplay: React.FC<{
   lastUpdatedDate: string | null;
 }> = ({ lastUpdatedDate }) => {
-  if (!lastUpdatedDate) {
-    return (
-      <span className='text-yellow-600 text-xs sm:text-sm'>
-        No date information available
-      </span>
-    );
-  }
-
   const isOld = isDateOlderThanSevenDays(lastUpdatedDate);
+
   return (
-    <span className={`dark:text-gray-300 text-xs sm:text-sm`}>
-      Last Updated: {lastUpdatedDate}
+    <span className={isOld ? 'text-red-600' : ''}>
+      {lastUpdatedDate ? `Last Updated: ${lastUpdatedDate}` : 'No date information available'}
     </span>
   );
 };
 
 interface DataGraphProps {
-  data?: Record<string, DataEntry>;
+  portfolioData?: Record<string, DataEntry>;
+  niftyData?: Record<string, number>;
   latestDate?: string;
 }
 
@@ -52,9 +44,6 @@ interface DataEntry {
     total_value: number;
     units: number;
   };
-  nifty50?: {
-    nav: number;
-  };
   [key: string]: any;
 }
 
@@ -64,19 +53,45 @@ interface ProcessedDataEntry {
   nsBundle: number;
 }
 
-const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
+
+
+interface PerformanceValues {
+  nsBundleValue: number;
+  nifty50Value: number;
+}
+
+const DataGraph: React.FC<DataGraphProps> = ({
+  portfolioData,
+  niftyData,
+  latestDate,
+}) => {
   const chartRef = useRef<am5.Root | null>(null);
-  const chartContainerRef = useRef<HTMLDivElement>(null); // Ref for the chart container
+  const chartContainerRef = useRef<HTMLDivElement>(null);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
   const [range, setRange] = useState('Lifetime');
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | undefined>(undefined);
   const [filteredData, setFilteredData] = useState<Record<
     string,
     DataEntry
   > | null>(null);
+  const [filteredNiftyData, setFilteredNiftyData] = useState<Record<
+    string,
+    number
+  > | null>(null);
+  const [performanceValues, setPerformanceValues] = useState<PerformanceValues>(
+    {
+      nsBundleValue: 100,
+      nifty50Value: 100,
+    }
+  );
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isChartReady, setIsChartReady] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(1024); // Default to desktop size
+  const [windowWidth, setWindowWidth] = useState(1024);
+  
+
+
+  // New state to store processed performance data
+  const [processedPerformanceData, setProcessedPerformanceData] = useState<ProcessedDataEntry[]>([]);
 
   // Helper function to get responsive height
   const getResponsiveHeight = (width: number): string => {
@@ -110,84 +125,162 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
   }, []); // Empty dependency array - runs only once on mount
 
   useEffect(() => {
-    if (data && latestDate) {
+    if (portfolioData && latestDate) {
       setEndDate(new Date(latestDate));
       setLastUpdated(new Date(latestDate).toISOString().split('T')[0]);
     }
-  }, [data, latestDate]);
+  }, [portfolioData, latestDate]);
 
   useEffect(() => {
-    if (!data || !endDate) {
+    if (!portfolioData || !niftyData || !endDate) {
       return;
     }
 
     try {
-      // Convert data to array format with Date property
-      const dataArray = Object.entries(data).map(([date, values]) => ({
-        Date: date,
-        ...values,
-      }));
-
-      // Filter data based on selected range
-      const filteredEntries = filterData(dataArray, range, 'Date', endDate);
-
-      // Convert filtered entries back to object format
-      const filteredDataObj = filteredEntries.reduce<Record<string, DataEntry>>(
-        (acc, curr) => {
-          const { Date: date, ...values } = curr;
-          if (date) {
-            acc[date] = values as DataEntry;
-          }
-          return acc;
-        },
-        {}
+      // Convert portfolio data to array format with Date property
+      const portfolioArray = Object.entries(portfolioData).map(
+        ([date, values]) => ({
+          Date: date,
+          ...values,
+        })
       );
 
-      setFilteredData(filteredDataObj);
+      // Convert nifty data to array format with Date property
+      const niftyArray = Object.entries(niftyData).map(([date, value]) => ({
+        Date: date,
+        value: value,
+      }));
+
+      // Filter all datasets based on selected range
+      const filteredPortfolioEntries = filterData(
+        portfolioArray,
+        range,
+        'Date',
+        endDate || undefined
+      );
+
+      const filteredNiftyEntries = filterData(
+        niftyArray,
+        range,
+        'Date',
+        endDate || undefined
+      );
+
+      // Convert filtered entries back to object format
+      const filteredPortfolioObj = filteredPortfolioEntries.reduce<
+        Record<string, DataEntry>
+      >((acc, curr) => {
+        const { Date: date, ...values } = curr;
+        if (date) {
+          acc[date] = values as DataEntry;
+        }
+        return acc;
+      }, {});
+
+      const filteredNiftyObj = filteredNiftyEntries.reduce<
+        Record<string, number>
+      >((acc, curr) => {
+        const date = (curr as any).Date;
+        const value = (curr as any).value;
+        if (date) {
+          acc[date] = value;
+        }
+        return acc;
+      }, {});
+
+      setFilteredData(filteredPortfolioObj);
+      setFilteredNiftyData(filteredNiftyObj);
     } catch (error) {
       console.error('Error filtering data:', error);
     }
-  }, [data, range, endDate]);
+  }, [portfolioData, niftyData, range, endDate]);
 
-  useEffect(() => {
-    // Only proceed if filterData is available, container exists, AND the chart is ready to be created
-    if (!filteredData || !chartContainerRef.current || !isChartReady) {
-      return;
-    }
-
-    // Clean up any existing chart before creating a new one
-    if (chartRef.current) {
-      chartRef.current.dispose();
-      chartRef.current = null;
+  // Shared function to calculate performance data
+  const calculatePerformanceData = (): ProcessedDataEntry[] => {
+    if (!filteredData || !filteredNiftyData) {
+      return [];
     }
 
     try {
-      // Process data for chart
-      const processedData: ProcessedDataEntry[] = Object.entries(filteredData)
-        .filter(([date]) => new Date(date) >= new Date('2023-08-16'))
-        .map(([date, values]) => {
-          const nsBundleNavT =
-            ((values?.equity?.total_value || 0) +
-              (values?.mf?.total_value || 0)) /
-            ((values?.equity?.units || 0) + (values?.mf?.units || 0));
-          const nsBundleNav = Number.isFinite(nsBundleNavT)
-            ? nsBundleNavT / 1000
-            : 0;
-          const nifty50Nav = values?.nifty50?.nav || 0;
-          const baseNiftyValue = 1235.7161;
-          // Simplified normalization check as baseNiftyValue is a non-zero constant
-          const normalizedNifty = nifty50Nav / baseNiftyValue;
-          return {
-            date: new Date(date).getTime(),
-            nifty50: Number.isNaN(normalizedNifty) ? 0 : normalizedNifty,
-            nsBundle: Number.isNaN(nsBundleNav) ? 0 : nsBundleNav,
-          };
-        })
-        .sort((a, b) => a.date - b.date);
+      /* ---------- 1. Build common date set ---------- */
+      let commonDates = Object.keys(filteredData)
+        .filter((d) => filteredNiftyData[d])
+        .filter((date) => new Date(date) >= new Date('2023-08-16'))
+        .sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
-      // Create root using the container ref
+      if (commonDates.length === 0) return [];
+
+      /* ---------- 2. Base values on earliest common date ---------- */
+      const baseDate = commonDates[0];
+      const baseNifty50 = filteredNiftyData[baseDate] ?? 0;
+
+      const baseBundleDenom =
+        (filteredData[baseDate]?.equity?.units || 0) +
+        (filteredData[baseDate]?.mf?.units || 0);
+      if (baseNifty50 === 0 || baseBundleDenom === 0) return []; // avoid bad maths
+
+      const baseBundleNavT =
+        ((filteredData[baseDate]?.equity?.total_value || 0) +
+          (filteredData[baseDate]?.mf?.total_value || 0)) /
+        baseBundleDenom;
+
+      /* ---------- 3. Build normalised series ---------- */
+      const processedData: ProcessedDataEntry[] = commonDates.map((d) => {
+        const p = filteredData[d];
+        const n = filteredNiftyData[d];
+
+        const denom = (p.equity?.units || 0) + (p.mf?.units || 0);
+        const bundleNavT =
+          denom === 0
+            ? 0
+            : ((p.equity?.total_value || 0) + (p.mf?.total_value || 0)) / denom;
+        const normalisedBundle =
+          bundleNavT && baseBundleNavT ? bundleNavT / baseBundleNavT : 0;
+        const normalisedNifty =
+          n && baseNifty50 ? n / baseNifty50 : 0;
+
+        return {
+          date: new Date(d).getTime(),
+          nsBundle: normalisedBundle * 100,
+          nifty50: normalisedNifty * 100,
+        };
+      });
+
+      return processedData;
+    } catch (error) {
+      console.error('Error calculating performance data:', error);
+      return [];
+    }
+  };
+
+  // Update processed data when filtered data changes
+  useEffect(() => {
+    const data = calculatePerformanceData();
+    setProcessedPerformanceData(data);
+  }, [filteredData, filteredNiftyData]);
+
+  const renderPerformanceChart = () => {
+    if (!filteredData || !filteredNiftyData || processedPerformanceData.length === 0 || !chartContainerRef.current) {
+      return;
+    }
+
+    try {
+      // Calculate performance values for ₹100 invested
+      const latest = processedPerformanceData[processedPerformanceData.length - 1];
+      if (latest) {
+        setPerformanceValues({
+          nsBundleValue: Math.round(latest.nsBundle),
+          nifty50Value: Math.round(latest.nifty50),
+        });
+      }
+
+      /* ---------- Chart rendering ---------- */
+      // Create root
       const root = am5.Root.new(chartContainerRef.current);
       chartRef.current = root;
+
+      // Set themes
+      root.setThemes([am5themesAnimated.new(root)]);
 
       // Define colors based on theme
       const textColor = isDarkMode ? am5.color(0xffffff) : am5.color(0x000000);
@@ -196,15 +289,6 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
       const nsBundleColor = isDarkMode
         ? am5.color(0x81c784)
         : am5.color(0x4caf50);
-      const tooltipBackgroundColor = isDarkMode
-        ? am5.color(0x333333)
-        : am5.color(0xffffff);
-      const tooltipTextColor = isDarkMode
-        ? am5.color(0xffffff)
-        : am5.color(0x000000);
-
-      // Set themes
-      root.setThemes([am5themesAnimated.new(root)]);
 
       // Create chart container
       const container = root.container.children.push(
@@ -215,27 +299,6 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
         })
       );
 
-      // Apply dark mode styles if enabled
-      if (isDarkMode) {
-        // Set container background to black for dark mode
-        container.set(
-          'background',
-          am5.Rectangle.new(root, {
-            fill: am5.color(0x000000),
-            fillOpacity: 1,
-          })
-        );
-      } else {
-        // Optional: Explicitly set light mode background
-        container.set(
-          'background',
-          am5.Rectangle.new(root, {
-            fill: am5.color(0xffffff),
-            fillOpacity: 1,
-          })
-        );
-      }
-
       // Create chart
       const chart = container.children.push(
         am5xy.XYChart.new(root, {
@@ -245,30 +308,16 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
           wheelY: 'zoomX',
           pinchZoomX: true,
           maxTooltipDistance: 0,
-          paddingLeft: windowWidth < 640 ? 5 : 0, // Reduced padding for mobile
-          paddingRight: windowWidth < 640 ? 5 : 0,
-          paddingTop: windowWidth < 640 ? 5 : 0,
-          paddingBottom: windowWidth < 640 ? 5 : 0,
           width: am5.percent(100),
-          height: am5.percent(100),
+          height: am5.percent(90),
         })
       );
-
-      // Explicitly set the chart and container to take maximum space
-      chart.root.dom.style.width = '100%';
-      chart.root.dom.style.height = '100%';
-
-      // Set container to occupy full space
-      container.setAll({
-        width: am5.p100,
-        height: am5.p100,
-      });
 
       // Add cursor
       const cursor = chart.set('cursor', am5xy.XYCursor.new(root, {}));
       cursor.lineY.set('visible', false);
 
-      // Create axes
+      // Create axes with proper styling
       const dateAxis = chart.xAxes.push(
         am5xy.DateAxis.new(root, {
           baseInterval: { timeUnit: 'day', count: 1 },
@@ -281,11 +330,11 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
         })
       );
 
+      // Style date axis
       dateAxis.get('renderer').grid.template.setAll({
         stroke: gridColor,
         strokeOpacity: 0.3,
       });
-
       dateAxis.get('renderer').labels.template.setAll({
         fill: textColor,
       });
@@ -298,28 +347,30 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
         })
       );
 
+      // Style value axis
       valueAxis.get('renderer').grid.template.setAll({
         stroke: gridColor,
         strokeOpacity: 0.3,
       });
-
       valueAxis.get('renderer').labels.template.setAll({
         fill: textColor,
       });
 
-      // Common tooltip settings
-      const tooltipSettings = {
+      // Create shared tooltip with white text for readability
+      const tooltip = am5.Tooltip.new(root, {
         getFillFromSprite: false,
-        getStrokeFromSprite: false,
         autoTextColor: false,
-        background: {
-          fill: tooltipBackgroundColor,
-          fillOpacity: 0.9,
-        },
-        label: {
-          fill: tooltipTextColor,
-        },
-      };
+        labelText: `[bold fontSize:15px #ffffff]📅 {valueX.formatDate('MMM dd, yyyy')}[/]
+
+[fontSize:14px #ffffff]●[/] [bold fontSize:14px #ffffff]Nifty50:[/] [fontSize:14px #ffffff bold]{nifty50.formatNumber('#,###.##')}[/]
+[fontSize:14px #ffffff]●[/] [bold fontSize:14px #ffffff]NS:[/] [fontSize:14px #ffffff bold]{nsBundle.formatNumber('#,###.##')}[/]`,
+      });
+
+      // Apply basic styling
+      tooltip.set('paddingTop', 15);
+      tooltip.set('paddingBottom', 15);
+      tooltip.set('paddingLeft', 20);
+      tooltip.set('paddingRight', 20);
 
       const niftySeries = chart.series.push(
         am5xy.LineSeries.new(root, {
@@ -330,300 +381,150 @@ const DataGraph: React.FC<DataGraphProps> = ({ data, latestDate }) => {
           valueXField: 'date',
           stroke: niftyColor,
           fill: niftyColor,
-          tooltip: am5.Tooltip.new(root, {
-            getFillFromSprite: false,
-            getStrokeFromSprite: false,
-            autoTextColor: false,
-            labelText: `[bold]{name}[/]
-Date: [bold]{valueX.formatDate('yyyy-MM-dd')}[/]
-Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
-          }),
+          tooltip,
         })
       );
-
-      niftySeries.get('tooltip')?.get('background')?.setAll({
-        fill: tooltipBackgroundColor,
-        fillOpacity: 0.9,
-      });
-      niftySeries.get('tooltip')?.label.set('fill', tooltipTextColor);
 
       // Create series for NS Bundle
       const nsBundleSeries = chart.series.push(
         am5xy.LineSeries.new(root, {
-          name: 'NS Bundle',
+          name: 'NS',
           xAxis: dateAxis,
           yAxis: valueAxis,
           valueYField: 'nsBundle',
           valueXField: 'date',
           stroke: nsBundleColor,
           fill: nsBundleColor,
-          tooltip: am5.Tooltip.new(root, {
-            getFillFromSprite: false,
-            getStrokeFromSprite: false,
-            autoTextColor: false,
-            labelText: `[bold]{name}[/]
-Date: [bold]{valueX.formatDate('yyyy-MM-dd')}[/]
-Value: [bold]{valueY.formatNumber('#,###.##')}[/]`,
-          }),
+          tooltip,
         })
       );
 
-      nsBundleSeries.get('tooltip')?.get('background')?.setAll({
-        fill: tooltipBackgroundColor,
-        fillOpacity: 0.9,
-      });
-      nsBundleSeries.get('tooltip')?.label.set('fill', tooltipTextColor);
+      niftySeries.data.setAll(processedPerformanceData);
+      nsBundleSeries.data.setAll(processedPerformanceData);
 
-      niftySeries.data.setAll(processedData);
-      nsBundleSeries.data.setAll(processedData);
-
-      // Create legend
+      // Create legend at bottom
       const legend = container.children.push(
         am5.Legend.new(root, {
           centerX: am5.percent(50),
           x: am5.percent(50),
           layout: root.horizontalLayout,
-          marginTop: windowWidth < 640 ? 8 : 15, // Reduced margin for mobile
-          marginBottom: windowWidth < 640 ? 5 : 0,
+          marginTop: 15,
           useDefaultMarker: true,
+          clickTarget: "marker", // Only marker is clickable, not text
         })
       );
 
-      // Style legend text
-      legend.labels.template.setAll({
-        fill: textColor,
-        fontSize: windowWidth < 640 ? 8 : 12, // Even smaller font on mobile
-      });
-
       // Customize legend markers
       legend.markers.template.setAll({
-        width: windowWidth < 640 ? 8 : 15, // Smaller markers on mobile
-        height: windowWidth < 640 ? 8 : 15,
+        width: 15,
+        height: 15,
+      });
+
+      // Customize legend labels to always show with white text
+      legend.labels.template.setAll({
+        fill: am5.color(0xffffff), // White text by default
+        opacity: 1, // Always visible
+      });
+
+      // Disable default label hiding behavior and handle color changes
+      legend.labels.template.adapters.add("opacity", function(opacity, target) {
+        const series = target?.dataItem?.dataContext;
+        if (series && (series as any).isHidden && (series as any).isHidden()) {
+          // Change fill color instead of opacity
+          target?.set("fill", am5.color(0x888888)); // Gray when hidden
+          return 1; // Keep fully visible
+        } else {
+          target?.set("fill", am5.color(0xffffff)); // White when visible
+          return 1; // Keep fully visible
+        }
       });
 
       legend.data.setAll(chart.series.values);
 
-      // Common tooltip content - simplified for mobile
-      const getTooltipText = (series: string) => {
-        return windowWidth < 640
-          ? `[bold]{name}[/]: [bold]{valueY.formatNumber('#,###.##')}[/]`
-          : `[bold]{name}[/]
-Date: [bold]{valueX.formatDate('yyyy-MM-dd')}[/]
-Value: [bold]{valueY.formatNumber('#,###.##')}[/]`;
-      };
-
-      // Update tooltip settings for both series
-      niftySeries.get('tooltip')?.set('labelText', getTooltipText('Nifty50'));
-      nsBundleSeries
-        .get('tooltip')
-        ?.set('labelText', getTooltipText('NS Bundle'));
-
-      // Make date axis labels responsive
-      dateAxis.get('renderer').labels.template.setAll({
-        fill: textColor,
-        fontSize: windowWidth < 640 ? 8 : 12, // Smaller font for mobile
-        rotation: windowWidth < 640 ? -45 : 0,
-        centerY: windowWidth < 640 ? am5.p50 : am5.p0,
-        centerX: windowWidth < 640 ? am5.p100 : am5.p50,
-      });
-
-      // Make value axis labels responsive
-      valueAxis.get('renderer').labels.template.setAll({
-        fill: textColor,
-        fontSize: windowWidth < 640 ? 8 : 12, // Smaller font for mobile
-      });
-
       // Animation and zoom
       chart.appear(1000, 100);
       dateAxis.zoom(0, 1);
-
-      // Force immediate height setting
-      if (chartContainerRef.current) {
-        const responsiveHeight = getResponsiveHeight(windowWidth);
-        chartContainerRef.current.style.height = responsiveHeight;
-        chartContainerRef.current.style.minHeight = responsiveHeight;
-      }
-
-      // Multiple resize attempts with different delays
-      const timeoutIds: number[] = [];
-
-      // Immediate resize
-      root.resize();
-
-      // After a short delay (for the initial layout to settle)
-      timeoutIds.push(
-        window.setTimeout(() => {
-          if (chartRef.current) {
-            chartRef.current.resize();
-          }
-        }, 50)
-      );
-
-      // After animation completes
-      timeoutIds.push(
-        window.setTimeout(() => {
-          if (chartRef.current) {
-            chartRef.current.resize();
-          }
-        }, 1200) // Just after the 1000ms appear animation
-      );
-
-      // One more time after everything should be stable
-      timeoutIds.push(
-        window.setTimeout(() => {
-          if (chartRef.current) {
-            chartRef.current.resize();
-          }
-        }, 2000)
-      );
-
-      // Handle window resize
-      const handleResize = () => {
-        if (chartRef.current) {
-          // Update chart size
-          chartRef.current.resize();
-
-          // Update container height based on screen size
-          if (chartContainerRef.current) {
-            const responsiveHeight = getResponsiveHeight(windowWidth);
-            chartContainerRef.current.style.height = responsiveHeight;
-            chartContainerRef.current.style.minHeight = responsiveHeight;
-          }
-
-          // Update text sizes based on screen width
-          const isMobile = windowWidth < 640;
-
-          // Update legend text sizes
-          legend.labels.template.setAll({
-            fontSize: isMobile ? 8 : 12, // Smaller font for mobile
-          });
-
-          // Update legend marker sizes
-          legend.markers.template.setAll({
-            width: isMobile ? 8 : 15, // Smaller markers for mobile
-            height: isMobile ? 8 : 15,
-          });
-
-          // Update axis label sizes and rotation
-          dateAxis.get('renderer').labels.template.setAll({
-            fontSize: isMobile ? 8 : 12, // Smaller font for mobile
-            rotation: isMobile ? -45 : 0,
-            centerY: isMobile ? am5.p50 : am5.p0,
-            centerX: isMobile ? am5.p100 : am5.p50,
-          });
-
-          valueAxis.get('renderer').labels.template.setAll({
-            fontSize: isMobile ? 8 : 12, // Smaller font for mobile
-          });
-
-          // Update tooltips
-          niftySeries
-            .get('tooltip')
-            ?.set('labelText', getTooltipText('Nifty50'));
-          nsBundleSeries
-            .get('tooltip')
-            ?.set('labelText', getTooltipText('NS Bundle'));
-        }
-      };
-
-      // Add window resize listener
-      window.addEventListener('resize', handleResize);
-
-      // Continue with ResizeObserver setup
-      const resizeObserver = new ResizeObserver(() => {
-        if (chartRef.current) {
-          chartRef.current.resize();
-        }
-      });
-
-      // Start observing the chart container
-      resizeObserver.observe(chartContainerRef.current);
-
-      // Refined cleanup function
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      return () => {
-        // Clear all timeout IDs
-        timeoutIds.forEach((id) => window.clearTimeout(id));
-
-        // Remove resize listener
-        window.removeEventListener('resize', handleResize);
-
-        // Stop observing
-        resizeObserver.disconnect();
-
-        // Check if root exists before disposing
-        if (chartRef.current) {
-          chartRef.current.dispose();
-          chartRef.current = null; // Nullify the ref
-        }
-      };
     } catch (error) {
       console.error('Error in DataGraph:', error);
-      // Ensure cleanup happens even if there's an error during setup
+    }
+  };
+
+
+
+  useEffect(() => {
+    if (processedPerformanceData.length === 0 || !isChartReady) {
+      return;
+    }
+
+    // Cleanup previous chart
+    if (chartRef.current) {
+      chartRef.current.dispose();
+      chartRef.current = null;
+    }
+
+    // Render performance chart
+    renderPerformanceChart();
+  }, [processedPerformanceData, isChartReady, isDarkMode, windowWidth]);
+
+  // Cleanup effect for chart disposal
+  useEffect(
+    () => () => {
       if (chartRef.current) {
         chartRef.current.dispose();
         chartRef.current = null;
       }
-    }
-  }, [filteredData, isDarkMode, isChartReady, windowWidth]);
+    },
+    []
+  );
 
   const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRange(event.target.value);
   };
 
+  const renderDataStatus = () => {
+    if (!filteredData) {
+      return <span className="text-red-600">No data available</span>;
+    }
+
+    if (!lastUpdated) {
+      return (
+        <span className="text-yellow-600">No date information available</span>
+      );
+    }
+
+    return <LastUpdatedStatusDisplay lastUpdatedDate={lastUpdated} />;
+  };
+
   return (
-    <div className='p-1 sm:p-4 dark:bg-black dark:text-white'>
-      {/* <h2 className="text-center  text-xl dark:text-white">
-        Portfolio Performance
-      </h2> */}
-      <div className='mb-2 sm:mb-4'>
-        <ButtonGroup className='mr-4 flex flex-wrap gap-1 sm:flex-nowrap w-full'>
+    <div style={{ margin: '10px' }}>
+      <div className="flex items-center mb-6 relative">
+        
+      </div>
+
+      <div className="mb-4">
+        <ButtonGroup className="mr-4">
           {['Lifetime', '3M', '6M', '1Y'].map((value) => (
             <ToggleButton
               key={value}
-              id={`range-${value}`}
-              type='radio'
-              variant='outline-primary'
+              id={`range-pp-${value}`}
+              type="radio"
+              variant="outline-primary"
               value={value}
               checked={range === value}
               onChange={handleRangeChange}
-              className='text-sm sm:text-base flex-1'
             >
               {value}
             </ToggleButton>
           ))}
         </ButtonGroup>
       </div>
-      {/* Assign the ref to the chart container div */}
-      <div className={windowWidth < 640 ? 'overflow-x-auto' : ''}>
-        <div
-          ref={chartContainerRef}
-          id='chartdivportfolio'
-          style={{
-            width: '100%',
-            height: getResponsiveHeight(windowWidth),
-            minWidth: windowWidth < 640 ? '500px' : '100%', // Minimum width for mobile horizontal scroll
-            minHeight: getResponsiveHeight(windowWidth),
-            position: 'relative',
-          }}
-          className='w-full'
-        >
-          {!isChartReady && (
-            <div className='absolute inset-0 flex items-center justify-center'>
-              <div className='text-lg'>Loading chart...</div>
-            </div>
-          )}
-        </div>
-      </div>
-      <div className='text-right mt-1 sm:mt-2'>
-        {data ? (
-          <LastUpdatedStatusDisplay lastUpdatedDate={lastUpdated} />
-        ) : (
-          <span className='text-red-600 text-xs sm:text-sm'>
-            No data available
-          </span>
-        )}
-      </div>
+      
+      <div 
+        ref={chartContainerRef}
+        style={{ width: '100%', height: getResponsiveHeight(windowWidth) }} 
+      />
+             
+       <div className="text-right mt-2">{renderDataStatus()}</div>
     </div>
   );
 };
