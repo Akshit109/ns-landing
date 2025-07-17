@@ -210,22 +210,24 @@ const ThreeDimensionalAssetClassDarkMode = ({
     legendContainer.style.flexDirection = 'row';
     legendContainer.style.flexWrap = 'wrap';
     legendContainer.style.justifyContent = isMobile ? 'flex-start' : 'center';
-    legendContainer.style.marginTop = '15px';
+    legendContainer.style.marginTop = isMobile ? '5px' : '15px';
     legendContainer.style.backgroundColor = 'transparent';
     legendContainer.style.padding = isMobile ? '10px 5px' : '5px';
     legendContainer.style.color = 'white';
     legendContainer.style.fontSize = isMobile ? '10px' : '12px';
-    legendContainer.style.gap = isMobile ? '8px' : '10px';
+    legendContainer.style.gap = isMobile ? '8px' : '0px'; // Remove gap since we're using margins
     containerRef.current.appendChild(legendContainer);
 
     sortedData.forEach((segment, index) => {
       const item = document.createElement('div');
       item.style.display = 'flex';
       item.style.alignItems = 'center';
-      item.style.marginRight = isMobile ? '0' : '10px'; // Remove right margin on mobile
-      item.style.marginBottom = isMobile ? '8px' : '5px'; // More spacing between rows on mobile
-      item.style.minWidth = isMobile ? 'calc(50% - 4px)' : '120px'; // Two columns on mobile
-      item.style.flex = isMobile ? '0 0 calc(50% - 4px)' : 'none'; // Flex basis for mobile
+      item.style.marginRight = isMobile ? '0' : '0px'; // Remove right margin for better centering
+      item.style.marginBottom = isMobile ? '8px' : '5px'; // Minimal spacing between rows
+      item.style.paddingLeft = isMobile ? '0' : '8px'; // Add horizontal padding for even spacing
+      item.style.paddingRight = isMobile ? '0' : '8px'; // Add horizontal padding for even spacing
+      item.style.minWidth = isMobile ? 'calc(50% - 4px)' : '120px'; // Even smaller items for larger screens
+      item.style.flex = isMobile ? '0 0 calc(50% - 4px)' : '0 0 auto'; // Auto sizing for better distribution
 
       const colorBox = document.createElement('div');
       colorBox.style.width = isMobile ? '8px' : '12px'; // Smaller box on mobile
@@ -250,10 +252,12 @@ const ThreeDimensionalAssetClassDarkMode = ({
     const fnoItem = document.createElement('div');
     fnoItem.style.display = 'flex';
     fnoItem.style.alignItems = 'center';
-    fnoItem.style.marginRight = isMobile ? '0' : '10px'; // Remove right margin on mobile
-    fnoItem.style.marginBottom = isMobile ? '8px' : '5px'; // More spacing between rows on mobile
-    fnoItem.style.minWidth = isMobile ? 'calc(50% - 4px)' : '120px'; // Two columns on mobile
-    fnoItem.style.flex = isMobile ? '0 0 calc(50% - 4px)' : 'none'; // Flex basis for mobile
+    fnoItem.style.marginRight = isMobile ? '0' : '0px'; // Remove right margin for better centering
+    fnoItem.style.marginBottom = isMobile ? '8px' : '5px'; // Minimal spacing between rows
+    fnoItem.style.paddingLeft = isMobile ? '0' : '8px'; // Add horizontal padding for even spacing
+    fnoItem.style.paddingRight = isMobile ? '0' : '8px'; // Add horizontal padding for even spacing
+    fnoItem.style.minWidth = isMobile ? 'calc(50% - 4px)' : '120px'; // Even smaller items for larger screens
+    fnoItem.style.flex = isMobile ? '0 0 calc(50% - 4px)' : '0 0 auto'; // Auto sizing for better distribution
 
     const fnoColorBox = document.createElement('div');
     fnoColorBox.style.width = isMobile ? '8px' : '12px'; // Smaller box on mobile
