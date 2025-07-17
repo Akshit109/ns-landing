@@ -1,9 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import DataGraphPage from '../data-graph';
+import EmailModal from './EmailModal';
 
 const PieSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDownloadClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div id='latest-performance'>
       <div className='flex flex-col items-center justify-center text-center px-4'>
@@ -178,15 +189,12 @@ const PieSection = () => {
                     Even through market volatility
                   </p>
                 </div>
-                <a
-                  href='/niftyshloka.pdf'
+                <button
+                  onClick={handleDownloadClick}
                   className='inline-flex w-fit items-center gap-2 mt-4 md:mt-2 px-4 py-2 bg-ctaColor no-underline text-black hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
-                  download
-                  target='_blank'
-                  rel='noopener noreferrer'
                 >
                   Download Deck
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -233,6 +241,9 @@ const PieSection = () => {
           </div>
         </div>
       </div>
+      
+      {/* Email Modal */}
+      <EmailModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };
