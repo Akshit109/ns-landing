@@ -9,14 +9,13 @@ const nextConfig = {
     // Ignore ESLint errors during build
     ignoreDuringBuilds: true,
   },
-  // Output in a format compatible with Netlify
-  output: 'export',
-  // Images optimization needs to be handled differently with 'export'
+  // Remove static export to enable API routes
+  // output: 'export', // Commented out to enable API routes
+  // Images optimization can be enabled with server-side rendering
   images: {
-    unoptimized: true,
+    unoptimized: true, // Keep this for now
   },
-  // Don't generate a 404 page as Netlify will handle it
-  trailingSlash: true,
+  // trailingSlash: true, // Not needed with server-side rendering
 };
 
 module.exports = nextConfig;

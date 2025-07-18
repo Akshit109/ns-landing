@@ -1,9 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import DataGraphPage from '../data-graph';
+import EmailModal from './EmailModal';
 
 const PieSection = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDownloadClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div id='latest-performance'>
       <div className='flex flex-col items-center justify-center text-center px-4'>
@@ -42,10 +53,10 @@ const PieSection = () => {
                               Return(TWRR)
                             </td>
                             <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold'>
-                              31.64%
+                              37.25%
                             </td>
                             <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold'>
-                              23.99%
+                              31.57%
                             </td>
                           </tr>
                           <tr>
@@ -64,10 +75,10 @@ const PieSection = () => {
                               Current Drawdown
                             </td>
                             <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold text-customRed'>
-                              -0.92%
+                              -3.43%
                             </td>
                             <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold text-customRed'>
-                              -8.42%
+                              -4.07%
                             </td>
                           </tr>
                         </tbody>
@@ -154,10 +165,10 @@ const PieSection = () => {
 
                     <div className='flex flex-col md:flex-row md:justify-between text-xs text-white mt-2 px-2'>
                       <span className='text-customLightGray'>
-                        *Launched in August 2023 (~ 22 months)
+                        *Launched in August 2023 (~ 23 months)
                       </span>
                       <span className='text-customLightGray'>
-                        As of 11-May-25
+                        As of 14-July-25
                       </span>
                     </div>
                   </div>
@@ -178,15 +189,12 @@ const PieSection = () => {
                     Even through market volatility
                   </p>
                 </div>
-                <a
-                  href='/Nifty.Shloka..pdf'
+                <button
+                  onClick={handleDownloadClick}
                   className='inline-flex w-fit items-center gap-2 mt-4 md:mt-2 px-4 py-2 bg-ctaColor no-underline text-black hover:bg-customLightGray hover:text-ctaColor transition-all duration-700 ease-in-out rounded-full shadow-sm font-medium'
-                  download
-                  target='_blank'
-                  rel='noopener noreferrer'
                 >
                   Download Deck
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -233,6 +241,9 @@ const PieSection = () => {
           </div>
         </div>
       </div>
+      
+      {/* Email Modal */}
+      <EmailModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );
 };

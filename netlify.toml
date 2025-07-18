@@ -1,14 +1,14 @@
 [build]
   command = "npm run build"
-  publish = "out"
+  publish = ".next"
   ignore = "git diff --quiet HEAD^ HEAD ./"
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
 
-# Since we're using Next.js export, we don't need the Next.js plugin
-# [[plugins]]
-#   package = "@netlify/plugin-nextjs"
+# Enable Next.js plugin for API routes and server-side rendering
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 # Handle static files
 # [[redirects]]
