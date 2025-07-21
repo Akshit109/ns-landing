@@ -20,7 +20,7 @@ const PieSection = () => {
       <div className='flex flex-col items-center justify-center text-center px-4'>
         <div className='grid grid-cols-12 gap-6 md:gap-12 lg:gap-24 w-full max-w-[1400px]'>
           {/* performance screenshot section */}
-          <div className='col-span-12 h-screen flex items-center justify-center'>
+          <div className='col-span-12 md:h-screen flex items-center justify-center'>
             <div className='flex flex-col md:flex-row md:justify-between space-y-6 md:space-y-0 w-full'>
               {/* Chart Section */}
               <div className='md:w-1/2 border-b pb-4'>
@@ -28,7 +28,7 @@ const PieSection = () => {
                 <div className='md:px-0'>
                   <div className='w-full'>
                     <div className='bg-black rounded-lg py-2 mb-4'>
-                      <h3 className='text-customLightGray text-2xl md:text-3xl font-normal text-center'>
+                      <h3 className='text-customLightGray text-2xl md:text-3xl font-normal text-center mt-6 md:mt-0'>
                         Why Nifty <span className='text-ctaColor'>Shloka</span>?
                       </h3>
                     </div>
@@ -38,47 +38,47 @@ const PieSection = () => {
                       <table className='w-full text-center border-separate border-spacing-0 bg-ctaColor rounded-lg shadow-lg'>
                         <thead>
                           <tr className='bg-ctaColor text-black'>
-                            <th className='border border-black px-4 md:px-6 py-2 md:py-3 text-base md:text-lg font-bold'></th>
-                            <th className='border border-black px-4 md:px-6 py-2 md:py-3 text-base md:text-lg font-bold'>
+                            <th className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-base md:text-lg font-bold'></th>
+                            <th className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-base md:text-lg font-bold'>
                               Nifty Shloka
                             </th>
-                            <th className='border border-black px-4 md:px-6 py-2 md:py-3 text-base md:text-lg font-bold'>
+                            <th className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-base md:text-lg font-bold'>
                               NIFTY 50
                             </th>
                           </tr>
                         </thead>
                         <tbody className='text-black text-base md:text-lg'>
                           <tr>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-medium text-left'>
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-medium text-left'>
                               Return(TWRR)
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold'>
-                              37.25%
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold'>
+                              37.46%
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold'>
-                              31.57%
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold'>
+                              28.95%
                             </td>
                           </tr>
                           <tr>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-medium text-left'>
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-medium text-left'>
                               Risk(Max Drawdown)
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold text-customRed'>
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
                               -7.94%
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold text-customRed'>
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
                               -15.77%
                             </td>
                           </tr>
                           <tr>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-medium text-left'>
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-medium text-left'>
                               Current Drawdown
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold text-customRed'>
-                              -3.43%
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
+                              -2.91%
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-2 md:py-3 font-semibold text-customRed'>
-                              -4.07%
+                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
+                              -4.76%
                             </td>
                           </tr>
                         </tbody>
@@ -98,7 +98,7 @@ const PieSection = () => {
                               Nifty Shloka
                             </p>
                             <p className='text-black font-semibold text-xl'>
-                              31.64%
+                              37.46%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -106,7 +106,7 @@ const PieSection = () => {
                               NIFTY 50
                             </p>
                             <p className='text-black font-semibold text-xl'>
-                              23.99%
+                              28.95%
                             </p>
                           </div>
                         </div>
@@ -148,7 +148,7 @@ const PieSection = () => {
                               Nifty Shloka
                             </p>
                             <p className='text-customRed font-semibold text-xl'>
-                              -0.92%
+                              -2.91%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -156,7 +156,7 @@ const PieSection = () => {
                               NIFTY 50
                             </p>
                             <p className='text-customRed font-semibold text-xl'>
-                              -8.42%
+                              -4.78%
                             </p>
                           </div>
                         </div>
@@ -168,7 +168,7 @@ const PieSection = () => {
                         *Launched in August 2023 (~ 23 months)
                       </span>
                       <span className='text-customLightGray'>
-                        As of 14-July-25
+                        As of 21-July-25
                       </span>
                     </div>
                   </div>
@@ -199,7 +199,7 @@ const PieSection = () => {
             </div>
           </div>
           {/* Graph screenshot section */}
-          <div className='col-span-12 h-screen flex items-center justify-center'>
+          <div className='col-span-12 md:h-screen flex items-center justify-center'>
             <div className='flex flex-col md:flex-row md:space-x-8 space-y-6 md:space-y-0 w-full'>
               {/* Chart Section */}
               <div className='md:w-2/3 order-2 md:order-2 mt-6 md:mt-0'>
@@ -208,7 +208,7 @@ const PieSection = () => {
 
               {/* Description Section */}
               <div className='md:w-1/3 md:flex md:flex-col md:justify-start order-1 md:order-1 text-left'>
-                <h2 className='text-3xl md:text-4xl text-customLightGray font-medium mt-12  mb-4 md:mb-6'>
+                <h2 className='text-3xl md:text-4xl text-customLightGray font-medium mt-24 md:mt-12  mb-4 md:mb-6'>
                   Portfolio Performance
                 </h2>
                 <p className='text-customLightGray text-lg md:text-2xl font-extralight leading-tight mb-2'>

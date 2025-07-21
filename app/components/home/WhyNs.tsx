@@ -11,7 +11,7 @@ const WhyNs = () => {
         <div className="flex flex-col md:flex-row gap-6 md:gap-8">
           {/* Text Section - Left side on MD+ */}
           <div className="w-full md:w-1/3 order-1">
-            <h2 className="text-3xl md:text-6xl text-customLightGray font-normal mb-6 md:mb-10">
+            <h2 className="text-3xl md:text-4xl text-customLightGray font-medium mb-6 md:mb-10">
               Why Nifty Shloka?
             </h2>
             <div className="grid grid-cols-1 gap-4 md:gap-6 mb-6 md:mb-10">
