@@ -59,7 +59,7 @@ const ThreeDimensionalAssetClassDarkMode = ({
 
     // Setup Three.js scene
     const width = isMobile ? Math.min(320, window.innerWidth - 40) : 900;
-    const canvasHeight = isMobile ? 400 : 700;
+    const canvasHeight = isMobile ? 320 : 500;
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x080808); // Changed to very dark black #080808
 
@@ -210,11 +210,11 @@ const ThreeDimensionalAssetClassDarkMode = ({
     legendContainer.style.flexDirection = 'row';
     legendContainer.style.flexWrap = 'wrap';
     legendContainer.style.justifyContent = isMobile ? 'flex-start' : 'center';
-    legendContainer.style.marginTop = isMobile ? '15px' : '15px';
+    legendContainer.style.marginTop = isMobile ? '-30px' : '-30px';
     legendContainer.style.backgroundColor = 'transparent';
-    legendContainer.style.padding = isMobile ? '10px 5px' : '5px';
+    legendContainer.style.padding = isMobile ? '2px 2px' : '5px';
     legendContainer.style.color = 'white';
-    legendContainer.style.fontSize = isMobile ? '10px' : '12px';
+    legendContainer.style.fontSize = isMobile ? '14px' : '12px';
     legendContainer.style.gap = isMobile ? '8px' : '0px'; // Remove gap since we're using margins
     containerRef.current.appendChild(legendContainer);
 
