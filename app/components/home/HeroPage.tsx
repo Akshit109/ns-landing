@@ -30,7 +30,7 @@ const HeroPage = () => {
       <div className='relative w-screen flex flex-col items-center justify-center pt-24 md:pt-28 min-h-[calc(100vh-80px)]'>
         <div className='w-[90%] max-w-6xl mx-auto text-center px-4'>
           <motion.h1
-            className='text-[2.5rem] sm:text-5xl md:text-[6.75rem] font-black mb-0  drop-shadow-xl text-customLightGray leading-[0.9] pb-0 tracking-[0.02em] sm:tracking-[0.10em]'
+            className='text-[2rem] sm:text-5xl md:text-[6.75rem] font-black mb-0  drop-shadow-xl text-customLightGray leading-[0.9] pb-0 tracking-[0.02em] sm:tracking-[0.10em]'
             variants={textVariants}
             initial='hidden'
             animate='visible'
@@ -39,7 +39,7 @@ const HeroPage = () => {
             EVERYTHING
           </motion.h1>
           <motion.h1
-            className='text-[2.5rem] sm:text-5xl md:text-[6.75rem] font-black mb-0  drop-shadow-xl text-customLightGray leading-[0.9] pb-0 tracking-[0.02em] sm:tracking-[0.06em]'
+            className='text-[2rem] sm:text-5xl md:text-[6.75rem] font-black mb-0  drop-shadow-xl text-customLightGray leading-[0.9] pb-0 tracking-[0.02em] sm:tracking-[0.06em]'
             variants={textVariants}
             initial='hidden'
             animate='visible'
@@ -48,7 +48,7 @@ const HeroPage = () => {
             EVERYWHERE
           </motion.h1>
           <motion.h1
-            className='text-[2.5rem] sm:text-6xl md:text-[6.75rem] font-black mb-4 md:mb-6 drop-shadow-xl text-customLightGray leading-[0.9] pb-0 tracking-[0.02em] sm:tracking-[0.11em]'
+            className='text-[2rem] sm:text-6xl md:text-[6.75rem] font-black mb-4 md:mb-6 drop-shadow-xl text-customLightGray leading-[0.9] pb-0 tracking-[0.02em] sm:tracking-[0.11em]'
             variants={textVariants}
             initial='hidden'
             animate='visible'
