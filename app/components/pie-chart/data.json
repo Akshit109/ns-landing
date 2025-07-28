@@ -2,51 +2,51 @@
   "summary": [
     {
       "assetClass": "EQUITY",
-      "pnl": "3379260.56",
-      "presentValue": "28109106.38",
-      "totalInvested": "24729845.82"
+      "pnl": "3131519.31",
+      "presentValue": "28337093.92",
+      "totalInvested": "25205574.61"
     },
     {
       "assetClass": "DEBT",
-      "pnl": "818005.27",
-      "presentValue": "8312715.78",
-      "totalInvested": "7494710.51"
+      "pnl": "810783.99",
+      "presentValue": "8375491.54",
+      "totalInvested": "7564707.55"
     },
     {
       "assetClass": "GOLD",
-      "pnl": "781730.47",
-      "presentValue": "2847871.36",
+      "pnl": "789003.85",
+      "presentValue": "2855144.74",
       "totalInvested": "2066140.89"
+    },
+    {
+      "assetClass": "LIQUID",
+      "pnl": "18714.51",
+      "presentValue": "2041731.00",
+      "totalInvested": "2023016.49"
     },
     {
       "assetClass": "CASH",
       "pnl": "0.00",
-      "presentValue": "1031535.99",
-      "totalInvested": "1031535.99"
-    },
-    {
-      "assetClass": "LIQUID",
-      "pnl": "16797.10",
-      "presentValue": "1439811.40",
-      "totalInvested": "1423014.29"
+      "presentValue": "1108012.61",
+      "totalInvested": "1108012.61"
     },
     {
       "assetClass": "INViTs/REiTs",
-      "pnl": "108953.27",
-      "presentValue": "862952.86",
+      "pnl": "115442.00",
+      "presentValue": "869441.59",
       "totalInvested": "753999.59"
     },
     {
       "assetClass": "SILVER",
-      "pnl": "135041.95",
-      "presentValue": "630038.50",
-      "totalInvested": "494996.55"
+      "pnl": "144882.01",
+      "presentValue": "649953.60",
+      "totalInvested": "505071.59"
     },
     {
       "assetClass": "HYBRID",
-      "pnl": "32.12",
-      "presentValue": "8031.53",
-      "totalInvested": "7999.41"
+      "pnl": "24.95",
+      "presentValue": "10024.30",
+      "totalInvested": "9999.35"
     }
   ]
 } 
