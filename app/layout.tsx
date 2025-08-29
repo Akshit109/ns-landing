@@ -17,7 +17,7 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: 'NS Landing',
+  title: 'Nifty Shloka',
   description: 'Welcome to NS Landing',
 };
 

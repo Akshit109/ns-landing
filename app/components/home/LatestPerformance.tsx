@@ -34,51 +34,49 @@ const PieSection = () => {
                     </div>
 
                     {/* Desktop table - hidden on mobile */}
-                    <div className='hidden md:block'>
-                      <table className='w-full text-center border-separate border-spacing-0 bg-ctaColor rounded-lg shadow-lg'>
+                    <div className='hidden md:block overflow-x-auto'>
+                      <table className='w-full text-center border-separate border-spacing-0 bg-customDarkGray rounded-2xl shadow-lg min-w-[600px]'>
                         <thead>
-                          <tr className='bg-ctaColor text-black'>
-                            <th className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-base md:text-lg font-bold'></th>
-                            <th className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-base md:text-lg font-bold'>
+                          <tr className='bg-customDarkGray text-black'>
+                            <th className='border-l border-t border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-sm md:text-base lg:text-lg font-bold rounded-tl-2xl'></th>
+                            <th className='border-l border-t border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-sm md:text-base lg:text-lg font-bold'>
                               Nifty Shloka
                             </th>
-                            <th className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-base md:text-lg font-bold'>
+                            <th className='border-l border-t border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-sm md:text-base lg:text-lg font-bold'>
                               NIFTY 50
+                            </th>
+                            <th className='border-l border-t border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 text-sm md:text-base lg:text-lg font-bold rounded-tr-2xl'>
+                              Alpha
                             </th>
                           </tr>
                         </thead>
-                        <tbody className='text-black text-base md:text-lg'>
+                        <tbody className='text-black text-sm md:text-base lg:text-lg'>
                           <tr>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-medium text-left'>
-                              Return(TWRR)
+                            <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-medium text-left'>
+                              Return (TWRR Annualised)
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold'>
-                              37.77%
+                            <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
+                              16.00%
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold'>
-                              28.49%
+                            <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
+                              13.50%
+                            </td>
+                            <td className='border-l border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
+                              19%
                             </td>
                           </tr>
                           <tr>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-medium text-left'>
-                              Risk(Max Drawdown)
+                            <td className='border-l border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-medium text-left rounded-bl-2xl'>
+                              Risk (Max Drawdown)
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
-                              -7.94%
+                            <td className='border-l border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
+                              -8.99%
                             </td>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
+                            <td className='border-l border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
                               -15.77%
                             </td>
-                          </tr>
-                          <tr>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-medium text-left'>
-                              Current Drawdown
-                            </td>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
-                              -2.95%
-                            </td>
-                            <td className='border border-black px-4 md:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
-                          -5.13%
+                            <td className='border-l border-r border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600 rounded-br-2xl'>
+                              43%
                             </td>
                           </tr>
                         </tbody>
@@ -88,75 +86,66 @@ const PieSection = () => {
                     {/* Mobile card view - visible only on small screens */}
                     <div className='md:hidden space-y-4'>
                       {/* Return Row */}
-                      <div className='bg-ctaColor rounded-lg shadow-lg p-4'>
-                        <h4 className='text-black font-bold text-lg border-b border-black pb-2 mb-3'>
-                          Return(TWRR)
+                      <div className='bg-customDarkGray rounded-2xl shadow-lg p-4'>
+                        <h4 className='text-black font-bold text-base border-b border-black pb-2 mb-3'>
+                          Return (TWRR Annualised)
                         </h4>
-                        <div className='grid grid-cols-2 gap-4'>
+                        <div className='grid grid-cols-1 sm:grid-cols-3 gap-3'>
                           <div className='text-center'>
-                            <p className='text-black font-medium mb-1'>
+                            <p className='text-black font-medium mb-1 text-sm'>
                               Nifty Shloka
                             </p>
-                            <p className='text-black font-semibold text-xl'>
-                              37.77%
+                            <p className='text-green-600 font-semibold text-lg'>
+                              16.00%
                             </p>
                           </div>
                           <div className='text-center'>
-                            <p className='text-black font-medium mb-1'>
+                            <p className='text-black font-medium mb-1 text-sm'>
                               NIFTY 50
                             </p>
-                            <p className='text-black font-semibold text-xl'>
-                              28.49%
+                            <p className='text-green-600 font-semibold text-lg'>
+                              13.50%
+                            </p>
+                          </div>
+                          <div className='text-center'>
+                            <p className='text-black font-medium mb-1 text-sm'>
+                              Alpha
+                            </p>
+                            <p className='text-green-600 font-semibold text-lg'>
+                              19%
                             </p>
                           </div>
                         </div>
                       </div>
 
                       {/* Risk Row */}
-                      <div className='bg-ctaColor rounded-lg shadow-lg p-4'>
-                        <h4 className='text-black font-bold text-lg border-b border-black pb-2 mb-3'>
-                          Risk(Max Drawdown)
+                      <div className='bg-customDarkGray rounded-2xl shadow-lg p-4'>
+                        <h4 className='text-black font-bold text-base border-b border-black pb-2 mb-3'>
+                          Risk (Max Drawdown)
                         </h4>
-                        <div className='grid grid-cols-2 gap-4'>
+                        <div className='grid grid-cols-1 sm:grid-cols-3 gap-3'>
                           <div className='text-center'>
-                            <p className='text-black font-medium mb-1'>
+                            <p className='text-black font-medium mb-1 text-sm'>
                               Nifty Shloka
                             </p>
-                            <p className='text-customRed font-semibold text-xl'>
-                              -7.94%
+                            <p className='text-customRed font-semibold text-lg'>
+                              -8.99%
                             </p>
                           </div>
                           <div className='text-center'>
-                            <p className='text-black font-medium mb-1'>
+                            <p className='text-black font-medium mb-1 text-sm'>
                               NIFTY 50
                             </p>
-                            <p className='text-customRed font-semibold text-xl'>
+                            <p className='text-customRed font-semibold text-lg'>
                               -15.77%
                             </p>
                           </div>
-                        </div>
-                      </div>
-
-                      {/* Current Drawdown Row */}
-                      <div className='bg-ctaColor rounded-lg shadow-lg p-4'>
-                        <h4 className='text-black font-bold text-lg border-b border-black pb-2 mb-3'>
-                          Current Drawdown
-                        </h4>
-                        <div className='grid grid-cols-2 gap-4'>
                           <div className='text-center'>
-                            <p className='text-black font-medium mb-1'>
-                              Nifty Shloka
+                            <p className='text-black font-medium mb-1 text-sm'>
+                              Alpha
                             </p>
-                            <p className='text-customRed font-semibold text-xl'>
-                              -2.95%
-                            </p>
-                          </div>
-                          <div className='text-center'>
-                            <p className='text-black font-medium mb-1'>
-                              NIFTY 50
-                            </p>
-                            <p className='text-customRed font-semibold text-xl'>
-                              -5.13%
+                            <p className='text-green-600 font-semibold text-lg'>
+                              43%
                             </p>
                           </div>
                         </div>
@@ -164,11 +153,12 @@ const PieSection = () => {
                     </div>
 
                     <div className='flex flex-col md:flex-row md:justify-between text-xs text-white mt-2 px-2'>
-                      <span className='text-customLightGray'>
-                        *Launched in August 2023 (~ 24 months)
-                      </span>
-                      <span className='text-customLightGray'>
-                        As of 22-Aug-25
+                      <div className='text-customLightGray space-y-1 md:space-y-0 md:flex md:flex-col md:items-start'>
+                        <div className='text-left'>*Zerodha verified</div>
+                        <div className='text-left'>*Launched in August 2023 (~ 24 months)</div>
+                      </div>
+                      <span className='text-customLightGray mt-2 md:mt-0'>
+                        As of 25-aug-25
                       </span>
                     </div>
                   </div>
