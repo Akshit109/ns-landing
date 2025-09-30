@@ -6,6 +6,7 @@ import HeroPage from './components/home/HeroPage';
 import WhyNs from './components/home/WhyNs';
 import PartnerWithNs from './components/home/PartnerWithNs';
 import ScrollToTop from './components/home/ScrollToTop';
+import PortfolioStats from './components/home/PortfolioStats';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <HomePage />
         <PieSection />
         <LatestPerformance />
+        <PortfolioStats />
         <WhyNs />
         <PartnerWithNs />
         <Disclaimer />

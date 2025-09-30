@@ -56,13 +56,13 @@ const PieSection = () => {
                               Return (TWRR Annualised)
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              16.19%
+                              17.13%
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              12.3%
+                              12.56%
                             </td>
                             <td className='border-l border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              31%
+                              36%
                             </td>
                           </tr>
                           <tr>
@@ -96,7 +96,7 @@ const PieSection = () => {
                               Nifty Shloka
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              16.19%
+                              17.13%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -104,7 +104,7 @@ const PieSection = () => {
                               NIFTY 50
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              12.3%
+                              12.56%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -112,7 +112,7 @@ const PieSection = () => {
                               Alpha
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              31%
+                              36%
                             </p>
                           </div>
                         </div>
@@ -155,10 +155,10 @@ const PieSection = () => {
                     <div className='flex flex-col md:flex-row md:justify-between text-xs text-white mt-2 px-2'>
                       <div className='text-customLightGray space-y-1 md:space-y-0 md:flex md:flex-col md:items-start'>
                         <div className='text-left'>*Zerodha verified</div>
-                        <div className='text-left'>*Launched in August 2023 (~ 25 months)</div>
+                        <div className='text-left'>*Launched in August 2023 (~ 26 months)</div>
                       </div>
                       <span className='text-customLightGray mt-2 md:mt-0'>
-                        As of 31-aug-25
+                        As of 30-Sep-25
                       </span>
                     </div>
                   </div>

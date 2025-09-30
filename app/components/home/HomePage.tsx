@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const HomePage = () => {
   return (
@@ -16,9 +17,12 @@ const HomePage = () => {
         Your entire investing journey—simplified into one modern portfolio.
       </p>
       {/* Logo */}
-      <img
+      <Image
         src="/logo.png"
         alt="Nifty Shloka Logo"
+        width={288}
+        height={288}
+        style={{ height: "auto" }}
         className="my-6 md:my-12 w-28 h-28 sm:w-32 sm:h-32 md:w-72 md:h-72 object-contain"
       />
    
