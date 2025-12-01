@@ -56,10 +56,10 @@ const PieSection = () => {
                               Return (TWRR Annualised)
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              16.41%
+                              16.47%
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              14.07%
+                              14.51%
                             </td>
                             <td className='border-l border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
                               36%
@@ -96,7 +96,7 @@ const PieSection = () => {
                               Nifty Shloka
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              16.41%
+                              16.47%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -104,7 +104,7 @@ const PieSection = () => {
                               NIFTY 50
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              14.07%
+                              14.51%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -158,7 +158,7 @@ const PieSection = () => {
                         <div className='text-left'>*Launched in August 2023 (~ 28 months)</div>
                       </div>
                       <span className='text-customLightGray mt-2 md:mt-0'>
-                        As of 31-Oct-25
+                        As of 30-Nov-25
                       </span>
                     </div>
                   </div>

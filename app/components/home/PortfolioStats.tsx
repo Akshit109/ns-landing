@@ -12,12 +12,12 @@ const PortfolioStats = () => {
     },
     {
       name: "Jensen's Alpha",
-      value: "7%",
+      value: "6%",
       description: "Portfolio delivers strong positive excess returns above expected CAPM returns."
     },
     {
       name: "Sharpe Ratio",
-      value: "0.82",
+      value: "0.81",
       description: "Portfolio offers good risk-adjusted performance — stronger than the market benchmark."
     },
     {
@@ -27,16 +27,16 @@ const PortfolioStats = () => {
     },
     {
       name: "Information Ratio",
-      value: "0.16",
+      value: "0.12",
       description: "Outperformance relative to NIFTY is modest but more consistent than before."
     }
   ];
 
   const cardMetrics = [
     { label: "Beta", value: "0.35" },
-    { label: "Jensen's Alpha", value: "7%" },
-    { label: "Sharpe Ratio", value: "0.82" },
-    { label: "Information ratio", value: "0.16" },
+    { label: "Jensen's Alpha", value: "6%" },
+    { label: "Sharpe Ratio", value: "0.81" },
+    { label: "Information ratio", value: "0.12" },
     { label: "Up/Down Ratio", value: "1.35" }
   ];
 
