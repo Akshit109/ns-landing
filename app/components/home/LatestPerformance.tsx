@@ -62,7 +62,7 @@ const PieSection = () => {
                               14.5%
                             </td>
                             <td className='border-l border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              36%
+                              21%
                             </td>
                           </tr>
                           <tr>
@@ -112,7 +112,7 @@ const PieSection = () => {
                               Alpha
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              36%
+                              21%
                             </p>
                           </div>
                         </div>
