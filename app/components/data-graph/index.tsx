@@ -7,7 +7,12 @@ import niftyData from './nifty50.json'; // Nifty50 data
 
 // Helper function to find the latest date from the portfolio data
 const getLatestDate = (data: Record<string, any>): string | undefined => {
-  const dates = Object.keys(data);
+  // Access the result data from the new structure
+  const resultData = data?.data?.result;
+  if (!resultData) {
+    return undefined;
+  }
+  const dates = Object.keys(resultData);
   if (dates.length === 0) {
     return undefined;
   }
@@ -17,9 +22,13 @@ const getLatestDate = (data: Record<string, any>): string | undefined => {
 
 const DataGraphPage = () => {
   const latestDate = getLatestDate(portfolioData);
+  
+  // Extract the actual data from the new structure
+  const actualPortfolioData = portfolioData?.data?.result;
+  const actualNiftyData = niftyData?.data?.result;
 
   // Ensure both data sources and latestDate are available before rendering
-  if (!portfolioData || !niftyData || typeof latestDate === 'undefined') {
+  if (!actualPortfolioData || !actualNiftyData || typeof latestDate === 'undefined') {
     // Optionally, render a loading state or an error message
     return <div>Loading data or data unavailable...</div>;
   }
@@ -28,8 +37,8 @@ const DataGraphPage = () => {
     <div>
       {/* Pass both data sources separately to DataGraphDark */}
       <DataGraphDark 
-        portfolioData={portfolioData} 
-        niftyData={niftyData} 
+        portfolioData={actualPortfolioData} 
+        niftyData={actualNiftyData} 
         latestDate={latestDate} 
       />
     </div>
