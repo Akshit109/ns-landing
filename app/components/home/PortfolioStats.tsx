@@ -17,7 +17,7 @@ const PortfolioStats = () => {
     },
     {
       name: "Sharpe Ratio",
-      value: "0.76",
+      value: "0.70",
       description: "Portfolio offers good risk-adjusted performance — stronger than the market benchmark."
     },
     {
@@ -27,7 +27,7 @@ const PortfolioStats = () => {
     },
     {
       name: "Information Ratio",
-      value: "0.30",
+      value: "0.34",
       description: "Outperformance relative to NIFTY is modest but more consistent than before."
     }
   ];
@@ -35,8 +35,8 @@ const PortfolioStats = () => {
   const cardMetrics = [
     { label: "Beta", value: "0.32" },
     { label: "Jensen's Alpha", value: "7%" },
-    { label: "Sharpe Ratio", value: "0.76" },
-    { label: "Information ratio", value: "0.30" },
+    { label: "Sharpe Ratio", value: "0.70" },
+    { label: "Information ratio", value: "0.34" },
     { label: "Up/Down Ratio", value: "1.45" }
   ];
 
