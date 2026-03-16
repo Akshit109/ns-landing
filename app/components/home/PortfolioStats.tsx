@@ -7,37 +7,37 @@ const PortfolioStats = () => {
   const portfolioMetrics = [
     {
       name: "Beta",
-      value: "0.32",
+      value: "0.31",
       description: "Portfolio volatility is ~65% lower than NIFTY → much less sensitive to market swings."
     },
     {
       name: "Jensen's Alpha",
-      value: "7%",
+      value: "8%",
       description: "Portfolio delivers strong positive excess returns above expected CAPM returns."
     },
     {
       name: "Sharpe Ratio",
-      value: "0.70",
+      value: "0.71",
       description: "Portfolio offers good risk-adjusted performance — stronger than the market benchmark."
     },
     {
       name: "Up/Down Ratio",
-      value: "1.45",
+      value: "1.51",
       description: "Gains on rising days are significantly larger than losses on falling days → positive asymmetry."
     },
     {
       name: "Information Ratio",
-      value: "0.34",
+      value: "0.50",
       description: "Outperformance relative to NIFTY is modest but more consistent than before."
     }
   ];
 
   const cardMetrics = [
-    { label: "Beta", value: "0.32" },
-    { label: "Jensen's Alpha", value: "7%" },
-    { label: "Sharpe Ratio", value: "0.70" },
-    { label: "Information ratio", value: "0.34" },
-    { label: "Up/Down Ratio", value: "1.45" }
+    { label: "Beta", value: "0.31" },
+    { label: "Jensen's Alpha", value: "8%" },
+    { label: "Sharpe Ratio", value: "0.71" },
+    { label: "Information ratio", value: "0.50" },
+    { label: "Up/Down Ratio", value: "1.51" }
   ];
 
   return (
