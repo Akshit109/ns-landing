@@ -62,7 +62,7 @@ const PieSection = () => {
                               7.57%
                             </td>
                             <td className='border-l border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              50%
+                              103%
                             </td>
                           </tr>
                           <tr>
