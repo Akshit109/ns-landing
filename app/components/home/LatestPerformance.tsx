@@ -70,13 +70,13 @@ const PieSection = () => {
                               Risk (Max Drawdown)
                             </td>
                             <td className='border-l border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
-                              -8.99%
+                              -11.15%
                             </td>
                             <td className='border-l border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
                               -15.77%
                             </td>
                             <td className='border-l border-r border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600 rounded-br-2xl'>
-                              43%
+                              29%
                             </td>
                           </tr>
                         </tbody>
@@ -129,7 +129,7 @@ const PieSection = () => {
                               Nifty Shloka
                             </p>
                             <p className='text-customRed font-semibold text-lg'>
-                              -8.99%
+                              -11.15%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -145,7 +145,7 @@ const PieSection = () => {
                               Alpha
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              43%
+                              29%
                             </p>
                           </div>
                         </div>
@@ -158,7 +158,7 @@ const PieSection = () => {
                         <div className='text-left'>*Launched in August 2023</div>
                       </div>
                       <span className='text-customLightGray mt-2 md:mt-0'>
-                        As of 2-Jan-26
+                        As of 23-Mar-26
                       </span>
                     </div>
                   </div>
