@@ -56,13 +56,13 @@ const PieSection = () => {
                               Return (TWRR Annualised)
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              13.1%
+                              12.5%
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              6.8%
+                              6.7%
                             </td>
                             <td className='border-l border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              93%
+                              86%
                             </td>
                           </tr>
                           <tr>
@@ -70,13 +70,13 @@ const PieSection = () => {
                               Risk (Max Drawdown)
                             </td>
                             <td className='border-l border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
-                              -12.62%
+                              -13.13%
                             </td>
                             <td className='border-l border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-customRed'>
                               -15.77%
                             </td>
                             <td className='border-l border-r border-b border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600 rounded-br-2xl'>
-                              19%
+                              17%
                             </td>
                           </tr>
                         </tbody>
@@ -96,7 +96,7 @@ const PieSection = () => {
                               Nifty Shloka
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              13.1%
+                              12.5%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -104,7 +104,7 @@ const PieSection = () => {
                               NIFTY 50
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              6.8%
+                              6.7%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -112,7 +112,7 @@ const PieSection = () => {
                               Alpha
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              50%
+                              86%
                             </p>
                           </div>
                         </div>
@@ -129,7 +129,7 @@ const PieSection = () => {
                               Nifty Shloka
                             </p>
                             <p className='text-customRed font-semibold text-lg'>
-                              -12.62%
+                              -13.13%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -145,7 +145,7 @@ const PieSection = () => {
                               Alpha
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              19%
+                              17%
                             </p>
                           </div>
                         </div>
@@ -155,10 +155,12 @@ const PieSection = () => {
                     <div className='flex flex-col md:flex-row md:justify-between text-xs text-white mt-2 px-2'>
                       <div className='text-customLightGray space-y-1 md:space-y-0 md:flex md:flex-col md:items-start'>
                         <div className='text-left'>*Zerodha verified</div>
-                        <div className='text-left'>*Launched in August 2023</div>
+                        <div className='text-left'>
+                          *Launched in August 2023 (~ 30+ months)
+                        </div>
                       </div>
                       <span className='text-customLightGray mt-2 md:mt-0'>
-                        As of 27-Mar-26
+                        As of 04-APR-26
                       </span>
                     </div>
                   </div>
