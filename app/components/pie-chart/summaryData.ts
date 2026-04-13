@@ -10,9 +10,9 @@ export interface AssetData {
 export const summary: AssetData[] = [
   {
     assetClass: "EQUITY",
-    pnl: "1316200.33",
-    presentValue: "27384510.11",
-    totalInvested: "26068309.78"
+    pnl: "1310883.83",
+    presentValue: "27905004.05",
+    totalInvested: "26594120.22"
   },
   {
     assetClass: "DEBT",
@@ -43,12 +43,6 @@ export const summary: AssetData[] = [
     pnl: "140902.63",
     presentValue: "1011310.74",
     totalInvested: "870408.11"
-  },
-  {
-    assetClass: "Other",
-    pnl: "-5316.50",
-    presentValue: "520493.94",
-    totalInvested: "525810.44"
   },
   {
     assetClass: "CASH",
