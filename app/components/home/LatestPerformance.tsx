@@ -56,13 +56,13 @@ const PieSection = () => {
                               Return (TWRR Annualised)
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              13.8%
+                              15.0%
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              8.8%
+                              9.5%
                             </td>
                             <td className='border-l border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              56%
+                              58%
                             </td>
                           </tr>
                           <tr>
@@ -96,7 +96,7 @@ const PieSection = () => {
                               Nifty Shloka
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              13.8%
+                              15.0%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -104,7 +104,7 @@ const PieSection = () => {
                               NIFTY 50
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              8.8%
+                              9.5%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -112,7 +112,7 @@ const PieSection = () => {
                               Alpha
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              56%
+                              58%
                             </p>
                           </div>
                         </div>
@@ -156,11 +156,11 @@ const PieSection = () => {
                       <div className='text-customLightGray space-y-1 md:space-y-0 md:flex md:flex-col md:items-start'>
                         <div className='text-left'>*Zerodha verified</div>
                         <div className='text-left'>
-                          *Launched in August 2023 (~ 30+ months)
+                          *Launched in August 2023 (~ 31+ months)
                         </div>
                       </div>
                       <span className='text-customLightGray mt-2 md:mt-0'>
-                        As of 13-APR-26
+                        As of 20-APR-26
                       </span>
                     </div>
                   </div>
