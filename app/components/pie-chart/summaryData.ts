@@ -10,56 +10,62 @@ export interface AssetData {
 export const summary: AssetData[] = [
   {
     assetClass: "EQUITY",
-    pnl: "3657658.29",
-    presentValue: "29005986.89",
-    totalInvested: "25348328.60"
+    pnl: "4297826.88",
+    presentValue: "30429453.70",
+    totalInvested: "26131626.81"
   },
   {
     assetClass: "DEBT",
-    pnl: "829537.96",
-    presentValue: "9417657.57",
-    totalInvested: "8588119.61"
+    pnl: "870638.27",
+    presentValue: "9462445.99",
+    totalInvested: "8591807.72"
   },
   {
     assetClass: "GOLD",
-    pnl: "2254970.35",
-    presentValue: "4715659.99",
-    totalInvested: "2460689.64"
+    pnl: "2309379.04",
+    presentValue: "4710871.65",
+    totalInvested: "2401492.61"
   },
   {
     assetClass: "SILVER",
-    pnl: "773437.93",
-    presentValue: "1315667.90",
+    pnl: "850291.58",
+    presentValue: "1392521.55",
     totalInvested: "542229.97"
   },
   {
-    assetClass: "LIQUID",
-    pnl: "8885.50",
-    presentValue: "1207893.00",
-    totalInvested: "1199007.50"
+    assetClass: "INViTs/REiTs",
+    pnl: "195132.01",
+    presentValue: "1065540.12",
+    totalInvested: "870408.11"
   },
   {
-    assetClass: "INViTs/REiTs",
-    pnl: "182117.79",
-    presentValue: "1052525.90",
-    totalInvested: "870408.11"
+    assetClass: "LIQUID",
+    pnl: "10649.08",
+    presentValue: "1009669.00",
+    totalInvested: "999019.92"
+  },
+  {
+    assetClass: "EQUITY\n",
+    pnl: "-14854.36",
+    presentValue: "395283.00",
+    totalInvested: "410137.36"
   },
   {
     assetClass: "CASH",
     pnl: "0.00",
-    presentValue: "935447.88",
-    totalInvested: "935447.88"
-  },
-  {
-    assetClass: "Other",
-    pnl: "-17381.21",
-    presentValue: "894467.10",
-    totalInvested: "911848.31"
+    presentValue: "276721.92",
+    totalInvested: "276721.92"
   },
   {
     assetClass: "HYBRID",
-    pnl: "1267.95",
-    presentValue: "221254.17",
-    totalInvested: "219986.22"
+    pnl: "3875.48",
+    presentValue: "231861.76",
+    totalInvested: "227986.28"
+  },
+  {
+    assetClass: "Other",
+    pnl: "0.00",
+    presentValue: "0.00",
+    totalInvested: "0.00"
   }
 ];
