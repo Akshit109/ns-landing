@@ -59,10 +59,10 @@ const PieSection = () => {
                               14%
                             </td>
                             <td className='border-l border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              8.7%
+                              7.7%
                             </td>
                             <td className='border-l border-r border-black px-2 md:px-4 lg:px-6 py-3 md:py-4 lg:py-5 xl:py-6 font-semibold text-green-600'>
-                              61%
+                              82%
                             </td>
                           </tr>
                           <tr>
@@ -104,7 +104,7 @@ const PieSection = () => {
                               NIFTY 50
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              8.7%
+                              7.7%
                             </p>
                           </div>
                           <div className='text-center'>
@@ -112,7 +112,7 @@ const PieSection = () => {
                               Alpha
                             </p>
                             <p className='text-green-600 font-semibold text-lg'>
-                              61%
+                              82%
                             </p>
                           </div>
                         </div>
@@ -156,11 +156,11 @@ const PieSection = () => {
                       <div className='text-customLightGray space-y-1 md:space-y-0 md:flex md:flex-col md:items-start'>
                         <div className='text-left'>*Zerodha verified</div>
                         <div className='text-left'>
-                          *Launched in August 2023 (~ 31+ months)
+                          *Launched in August 2023 (~ 32+ months)
                         </div>
                       </div>
                       <span className='text-customLightGray mt-2 md:mt-0'>
-                        As of 11-MAY-26
+                        As of 18-MAY-26
                       </span>
                     </div>
                   </div>
