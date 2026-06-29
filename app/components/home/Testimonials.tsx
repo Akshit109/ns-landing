@@ -44,11 +44,11 @@ export default function Testimonials() {
         >
 
 
-          <h2 className="mt-6 text-5xl font-bold text-white">
+          <h2 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-white">
 
             Trusted by{" "}
 
-            <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-500 bg-clip-text text-transparent">
+            <span className="text-ctaColor">
               Investors
             </span>
 
