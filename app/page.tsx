@@ -7,6 +7,7 @@ import WhyNs from './components/home/WhyNs';
 import PartnerWithNs from './components/home/PartnerWithNs';
 import ScrollToTop from './components/home/ScrollToTop';
 import PortfolioStats from './components/home/PortfolioStats';
+import Testimonials from "./components/home/Testimonials";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <div className='px-4 md:p-4 lg:p-16 space-y-8 md:space-y-16 lg:space-y-24'>
         <HomePage />
         <PieSection />
+        <Testimonials />
         <LatestPerformance />
         <PortfolioStats />
         <WhyNs />

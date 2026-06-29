@@ -17,11 +17,12 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { name: "Home", target: "pie-section" },
-    { name: "Performance", target: "latest-performance" },
-    { name: "Why us", target: "why-ns" },
-    { name: "Partner with us", target: "partner-with-ns" }
-  ];
+  { name: "Home", target: "pie-section" },
+  { name: "Reviews", target: "testimonials" },
+  { name: "Performance", target: "latest-performance" },
+  { name: "Why us", target: "why-ns" },
+  { name: "Partner with us", target: "partner-with-ns" }
+];
 
   return (
     <div className="w-full flex justify-center absolute top-4 z-20 px-4">
